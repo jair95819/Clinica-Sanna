@@ -15,7 +15,7 @@ namespace VentaMueble.Controllers
             _logger = logger;
         }
 
-        public IActionResult ListarCliente()
+        public IActionResult ListarCitas()
         {
             List<entCliente> list = new List<entCliente>();
            
