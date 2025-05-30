@@ -1,0 +1,100 @@
+﻿@model CapaEntidad.entCita
+
+@{
+    ViewData["Title"] = "Insertar Cita";
+}
+
+<h1 class="mb-4">Reservar Cita Médica</h1>
+
+<hr />
+
+<form asp-action="InsertarCita">
+    <div class="row">
+        <!-- Datos del Paciente -->
+        <div class="col-md-6">
+            <h4>Datos del Paciente</h4>
+            <div class="form-group">
+                <label asp-for="idPaciente" class="control-label"></label>
+                <input asp-for="idPaciente" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+                <label asp-for="nombrePaciente" class="control-label"></label>
+                <input asp-for="nombrePaciente" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="docPaciente" class="control-label"></label>
+                <input asp-for="docPaciente" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="telefonoPaciente" class="control-label"></label>
+                <input asp-for="telefonoPaciente" class="form-control" />
+            </div>
+        </div>
+
+        <!-- Datos del Médico -->
+        <div class="col-md-6">
+            <h4>Datos del Médico</h4>
+            <div class="form-group">
+                <label asp-for="idMedico" class="control-label"></label>
+                <input asp-for="idMedico" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+                <label asp-for="nombreMedico" class="control-label"></label>
+                <select asp-for="nombreMedico" asp-items="ViewBag.ListaMedicos" class="form-control" disabled="false">
+                    <option value="">Seleccione un médico</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="especialidadMedico" class="control-label"></label>
+                <select asp-for="especialidadMedico" asp-items="ViewBag.ListaEspecialidades" class="form-control" disabled="false">
+                    <option value="">Seleccione especialidad</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <!-- Detalles de la Cita -->
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Detalles de la Cita</h4>
+            <div class="form-group">
+                <label asp-for="idCita" class="control-label"></label>
+                <input asp-for="idCita" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+                <label asp-for="fCita" class="control-label">Fecha</label>
+                <select asp-for="fCita" asp-items="ViewBag.ListaFechas" class="form-control">
+                    <option value="">Seleccione una fecha</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="hCita" class="control-label">Hora</label>
+                <select asp-for="hCita" asp-items="ViewBag.ListaHoras" class="form-control">
+                    <option value="">Seleccione una hora</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="sedeCita" class="control-label">Sede</label>
+                <select asp-for="sedeCita" asp-items="ViewBag.ListaSedes" class="form-control">
+                    <option value="">Seleccione una sede</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="consCita" class="control-label">Consultorio</label>
+                <input asp-for="consCita" class="form-control" readonly />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group mt-4">
+        <input type="submit" value="Reservar Cita" class="btn btn-success btn-lg" />
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

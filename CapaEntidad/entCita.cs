@@ -8,8 +8,23 @@ namespace CapaEntidad
 {
     public class entCita
     {
-        public int idCita{ get; set; }
+        // Datos del Paciente
+        public int idPaciente { get; set; }
+        public string nombrePaciente { get; set; }
+        public string docPaciente { get; set; }
+        public string telefonoPaciente { get; set; }
 
-        public DateTime fecCreacion { get; set; }
+        // Datos del Médico
+        public int idMedico { get; set; }
+        public string nombreMedico { get; set; }
+        public string especialidadMedico { get; set; }
+
+        // Detalles de la Cita
+        public int idCita { get; set; }
+        public string fCita { get; set; }
+        public string hCita { get; set; }
+        public string sedeCita { get; set; }
+        public string consCita { get; set; }
     }
+
 }
