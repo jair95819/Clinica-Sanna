@@ -4,64 +4,62 @@
     ViewData["Title"] = "ListarCita";
 }
 
-<h4>Listado de Citas</h4>
+<div class="mt-4">
+    <h4>Listado de Citas</h4>
 
-<p>
-    @Html.ActionLink("Insertar Cita", "InsertarCita", "MantenedorCita", null, new { @class = "btn btn-success" })
-</p>
-
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.idCita)</th>
-            <th>@Html.DisplayNameFor(model => model.fCita)</th>
-            <th>@Html.DisplayNameFor(model => model.hCita)</th>
-            <th>@Html.DisplayNameFor(model => model.sedeCita)</th>
-            <th>@Html.DisplayNameFor(model => model.consCita)</th>
-            <th>Paciente</th>
-            <th>Médico</th>
-            <th>Especialidad</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var cita in Model ?? new List<CapaEntidad.entCita> {
-        new CapaEntidad.entCita {
-        idCita = 1,
-        fCita = "2024-09-10",
-        hCita = "08:00 AM",
-        sedeCita = "Sede Central",
-        consCita = "Consultorio 1",
-        nombrePaciente = "María López",
-        nombreMedico = "Dr. Juan Pérez",
-        especialidadMedico = "Cardiología"
-        },
-        new CapaEntidad.entCita {
-        idCita = 2,
-        fCita = "2024-09-11",
-        hCita = "10:00 AM",
-        sedeCita = "Sede Norte",
-        consCita = "Consultorio 2",
-        nombrePaciente = "Carlos Ramírez",
-        nombreMedico = "Dra. Ana Torres",
-        especialidadMedico = "Pediatría"
-        }
-        })
-        {
+    <table class="table table-bordered table-striped">
+        <thead>
             <tr>
-                <td>@cita.idCita</td>
-                <td>@cita.fCita</td>
-                <td>@cita.hCita</td>
-                <td>@cita.sedeCita</td>
-                <td>@cita.consCita</td>
-                <td>@cita.nombrePaciente</td>
-                <td>@cita.nombreMedico</td>
-                <td>@cita.especialidadMedico</td>
-                <td>
-                    <a href="#" class="btn btn-sm btn-primary">Editar</a>
-                    <a href="#" class="btn btn-sm btn-danger">Eliminar</a>
-                </td>
+                <th>@Html.DisplayNameFor(model => model.idCita)</th>
+                <th>@Html.DisplayNameFor(model => model.fCita)</th>
+                <th>@Html.DisplayNameFor(model => model.hCita)</th>
+                <th>@Html.DisplayNameFor(model => model.sedeCita)</th>
+                <th>@Html.DisplayNameFor(model => model.consCita)</th>
+                <th>Paciente</th>
+                <th>Médico</th>
+                <th>Especialidad</th>
+                <th>Acciones</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var cita in Model ?? new List<CapaEntidad.entCita> {
+            new CapaEntidad.entCita {
+            idCita = 1,
+            fCita = "2024-09-10",
+            hCita = "08:00 AM",
+            sedeCita = "Sede Central",
+            consCita = "Consultorio 1",
+            nombrePaciente = "María López",
+            nombreMedico = "Dr. Juan Pérez",
+            especialidadMedico = "Cardiología"
+            },
+            new CapaEntidad.entCita {
+            idCita = 2,
+            fCita = "2024-09-11",
+            hCita = "10:00 AM",
+            sedeCita = "Sede Norte",
+            consCita = "Consultorio 2",
+            nombrePaciente = "Carlos Ramírez",
+            nombreMedico = "Dra. Ana Torres",
+            especialidadMedico = "Pediatría"
+            }
+            })
+            {
+                <tr>
+                    <td>@cita.idCita</td>
+                    <td>@cita.fCita</td>
+                    <td>@cita.hCita</td>
+                    <td>@cita.sedeCita</td>
+                    <td>@cita.consCita</td>
+                    <td>@cita.nombrePaciente</td>
+                    <td>@cita.nombreMedico</td>
+                    <td>@cita.especialidadMedico</td>
+                    <td>
+                        <a href="#" class="btn btn-sm btn-primary">Editar</a>
+                        <a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
