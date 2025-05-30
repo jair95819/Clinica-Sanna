@@ -13,6 +13,16 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseStatusCodePages(async context =>
+{
+    var response = context.HttpContext.Response;
+
+    if (response.StatusCode == 404)
+    {
+        response.Redirect("/");
+    }
+});
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
