@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="entCita.cs" />
     <Compile Include="entCliente.cs" />
+    <Compile Include="entMedico.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
