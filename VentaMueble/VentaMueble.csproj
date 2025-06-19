@@ -15,4 +15,8 @@
     <ProjectReference Include="..\CapaLogica\CapaLogica.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\MantenedorMedico\" />
+  </ItemGroup>
+
 </Project>

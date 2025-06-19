@@ -67,6 +67,21 @@
                             Ambulancia
                         </a>
 
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAdministrador" aria-expanded="false" aria-controls="collapseAdministrador">
+                            <div class="sb-nav-link-icon"><i class="fas fa-user-cog"></i></div>
+                            Administrador
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseAdministrador" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="@Url.Action("Index", "MantenedorMedico")">Mantenedor Médico</a>
+                                <a class="nav-link" href="@Url.Action("Index", "MantenedorEspecialidad")">Mantenedor Especialidad</a>
+                                <a class="nav-link" href="@Url.Action("Index", "MantenedorSede")">Mantenedor Sede</a>
+                                <a class="nav-link" href="@Url.Action("Index", "MantenedorMetodoPago")">Mantenedor Método de Pago</a>
+                                <a class="nav-link" href="@Url.Action("Index", "MantenedorCiudad")">Mantenedor Ciudad</a>
+                                <a class="nav-link" href="@Url.Action("Index", "MantenedorDepartamento")">Mantenedor Departamento</a>
+                            </nav>
+                        </div>
                      
                     </div>
                 </div>
