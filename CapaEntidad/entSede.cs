@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace CapaEntidad
 {
-    public class entMedico
+    public class entSede
     {
-        public int idMedico { get; set; }
+        public int idSede { get; set; }
         public string nombre { get; set; }
-        public string especialidad { get; set; }
+        public string direccion { get; set; }
     }
 }
