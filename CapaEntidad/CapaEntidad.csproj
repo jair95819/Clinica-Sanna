@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="entCiudad.cs" />
     <Compile Include="entEspecialidad.cs" />
     <Compile Include="entCita.cs" />
     <Compile Include="entCliente.cs" />
