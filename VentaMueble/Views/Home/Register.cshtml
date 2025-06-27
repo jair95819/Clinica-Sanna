@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Registro - Clínica SANNA";
+}
+
+<div class="container">
+    <div class="login-container">
+        <div class="login-header">
+            <img src="https://example.com/logo.png" alt="Logo Clínica SANNA">
+            <h3>Crea tu cuenta en Clínica SANNA</h3>
+            <p>Por favor, completa los datos para registrarte.</p>
+        </div>
+
+        <form method="post" asp-controller="Home" asp-action="Register">
+            <div class="form-group">
+                <label for="username" class="form-label">Usuario</label>
+                <input type="text" class="form-control" id="username" name="username" required placeholder="Introduce tu nombre de usuario" />
+            </div>
+            <div class="form-group">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="password" name="password" required placeholder="Introduce tu contraseña" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Registrarse</button>
+            </div>
+        </form>
+
+        <div class="footer-links">
+            <a href="@Url.Action("Login", "Home")">¿Ya tienes cuenta? Inicia sesión</a>
+        </div>
+    </div>
+</div>
