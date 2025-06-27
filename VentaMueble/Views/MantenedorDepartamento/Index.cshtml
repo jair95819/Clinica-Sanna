@@ -1,0 +1,45 @@
+﻿@model List<CapaEntidad.entDepartamento>
+
+<div class="card p-3">
+    <h3>Registrar Departamento</h3>
+    <form asp-action="Insertar" method="post">
+        <div class="row mb-3">
+            <div class="col">
+                <input type="text" name="nombre" class="form-control" placeholder="Nombre de departamento" required />
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-success">Registrar</button>
+            </div>
+        </div>
+    </form>
+
+    <h4>Lista de Departamentos</h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr><th>Nombre</th><th>Acciones</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var d in Model)
+            {
+                <tr>
+                    <td>@d.nombre</td>
+                    <td>
+                        <button class="btn btn-sm btn-danger" onclick="eliminar(@d.idDepartamento)">Eliminar</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script>
+        function eliminar(id) {
+            if (confirm("¿Eliminar departamento?")) {
+                $.post('/MantenedorDepartamento/Eliminar', { id: id }, function () {
+                    cargarVistaParcial('/MantenedorDepartamento/Index');
+                });
+            }
+        }
+    </script>
+}

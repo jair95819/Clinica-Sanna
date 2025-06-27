@@ -1,0 +1,45 @@
+﻿@model List<CapaEntidad.entMetodoPago>
+
+<div class="card p-3">
+    <h3>Registrar Método de Pago</h3>
+    <form asp-action="Insertar" method="post">
+        <div class="row mb-3">
+            <div class="col">
+                <input type="text" name="descripcion" class="form-control" placeholder="Descripción" required />
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-success">Registrar</button>
+            </div>
+        </div>
+    </form>
+
+    <h4>Lista de Métodos</h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr><th>Descripción</th><th>Acciones</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model)
+            {
+                <tr>
+                    <td>@m.descripcion</td>
+                    <td>
+                        <button class="btn btn-sm btn-danger" onclick="eliminar(@m.idMetodoPago)">Eliminar</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script>
+        function eliminar(id) {
+            if (confirm("¿Eliminar método de pago?")) {
+                $.post('/MantenedorMetodoPago/Eliminar', { id: id }, function () {
+                    cargarVistaParcial('/MantenedorMetodoPago/Index');
+                });
+            }
+        }
+    </script>
+}
