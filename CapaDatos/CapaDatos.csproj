@@ -86,7 +86,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="conexion.cs" />
-    <Compile Include="datCliente.cs" />
+    <Compile Include="datPaciente.cs" />
+    <Compile Include="datUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

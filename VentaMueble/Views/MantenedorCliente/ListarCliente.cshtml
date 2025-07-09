@@ -1,37 +1,43 @@
-﻿@model IEnumerable<CapaEntidad.entCliente>
+﻿@model IEnumerable<CapaEntidad.entPaciente
+
+
+
+
+
+>
 
 @{
-    ViewData["Title"] = "ListarCliente";
+    ViewData["Title"] = "ListarPaciente";
 }
 
 <h4>Listado de Citas</h4>
 
 <p>
-    @Html.ActionLink("Insertar", "InsertarCliente")
+    @Html.ActionLink("Insertar", "InsertarPaciente")
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.idCliente)
+                @Html.DisplayNameFor(model => model.idPaciente)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.rucCliente)
+                @Html.DisplayNameFor(model => model.rucPaciente)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.razonSocial)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.dirCliente)
+                @Html.DisplayNameFor(model => model.dirPaciente)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.idCiudad)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.idTipoCliente)
+                @Html.DisplayNameFor(model => model.idTipoPaciente)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.idEstCliente)
+                @Html.DisplayNameFor(model => model.idEstPaciente)
             </th>
             <th></th>
         </tr>
@@ -40,29 +46,29 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.idCliente)
+                @Html.DisplayFor(modelItem => item.idPaciente)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.rucCliente)
+                @Html.DisplayFor(modelItem => item.rucPaciente)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.razonSocial)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.dirCliente)
+                @Html.DisplayFor(modelItem => item.dirPaciente)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.idCiudad)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.idTipoCliente)
+                @Html.DisplayFor(modelItem => item.idTipoPaciente)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.idEstCliente)
+                @Html.DisplayFor(modelItem => item.idEstPaciente)
             </td>
             <td>
-                @Html.ActionLink("Editar", "EditarCliente", new { id = item.idCliente }, new { @class = "btn btn-primary btn-sm" })
-                @Html.ActionLink("Eliminar", "EliminarCliente", new { id = item.idCliente }, new { @class = "btn btn-danger btn-sm" })
+                @Html.ActionLink("Editar", "EditarPaciente", new { id = item.idPaciente }, new { @class = "btn btn-primary btn-sm" })
+                @Html.ActionLink("Eliminar", "EliminarPaciente", new { id = item.idPaciente }, new { @class = "btn btn-danger btn-sm" })
             </td>
         </tr>
 }

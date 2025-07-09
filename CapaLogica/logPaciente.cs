@@ -10,59 +10,59 @@ using CapaEntidad;
 
 namespace CapaLogica
 {
-    public class logCliente
+    public class logPaciente
     {
         #region singleton
-        private static readonly logCliente UnicaInstancia = new logCliente();
+        private static readonly logPaciente UnicaInstancia = new logPaciente();
 
-        public static logCliente Instancia
+        public static logPaciente Instancia
         {
-            get { return logCliente.UnicaInstancia;  }
+            get { return logPaciente.UnicaInstancia;  }
         }
         #endregion singleton
 
         #region metodos
-        public List<entCliente> ListarCliente()
+        public List<entPaciente> ListarPaciente()
         {
-            List<entCliente> lista = datCliente.Instancia.ListarCliente();
+            List<entPaciente> lista = datPaciente.Instancia.ListarPaciente();
             return lista;
         }
 
-        public Boolean InsertarCliente(entCliente c)
+        public Boolean InsertarPaciente(entPaciente c)
         {
             try
             {
-                return datCliente.Instancia.InsertarCliente(c);
+                return datPaciente.Instancia.InsertarPaciente(c);
             }
             catch (Exception e)
             { throw e; }
         }
 
-        public Boolean EditarCliente(entCliente c)
+        public Boolean EditarPaciente(entPaciente c)
         {
             try
             {
-                return datCliente.Instancia.EditarCliente(c);
+                return datPaciente.Instancia.EditarPaciente(c);
             }
             catch (Exception e)
             { throw e; }
         }
 
-        public entCliente BuscarCliente(int id)
+        public entPaciente BuscarPaciente(int id)
         {
             try
             {
-                return datCliente.Instancia.BuscarCliente(id);
+                return datPaciente.Instancia.BuscarPaciente(id);
             }
             catch (Exception e)
             { throw e; }
         }
 
-        public Boolean EliminarCliente(int id)
+        public Boolean EliminarPaciente(int id)
         {
             try
             {
-                return datCliente.Instancia.EliminarCliente(id);
+                return datPaciente.Instancia.EliminarPaciente(id);
             }
             catch (Exception e)
             { throw e; }

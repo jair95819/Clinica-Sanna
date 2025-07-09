@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace CapaEntidad
 {
-    public class entCliente
+    public class entPaciente
     {
-        public int idCliente { get; set; }
-        public string rucCliente { get; set; }
+        public int idPaciente { get; set; }
+        public string rucPaciente { get; set; }
         public string razonSocial { get; set; }
-        public string dirCliente { get; set; }
+        public string dirPaciente { get; set; }
         public int idCiudad { get; set; }
-        public int idTipoCliente { get; set; }
-        public int idEstCliente { get; set; }
+        public int idTipoPaciente { get; set; }
+        public int idEstPaciente { get; set; }
 
         public DateTime fecCreacion { get; set; }
     }

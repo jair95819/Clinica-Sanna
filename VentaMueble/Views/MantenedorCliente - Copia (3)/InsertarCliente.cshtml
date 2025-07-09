@@ -1,21 +1,27 @@
-﻿@model CapaEntidad.entCliente
+﻿@model CapaEntidad.entPaciente
+
+
+
+
+
+
 
 @{
-    ViewData["Title"] = "InsertarCliente";
+    ViewData["Title"] = "InsertarPaciente";
 }
 
-<h1>InsertarCliente</h1>
+<h1>InsertarPaciente</h1>
 
-<h4>entCliente</h4>
+<h4>entPaciente</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="InsertarCliente">
+        <form asp-action="InsertarPaciente">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="rucCliente" class="control-label"></label>
-                <input asp-for="rucCliente" class="form-control" />
-                <span asp-validation-for="rucCliente" class="text-danger"></span>
+                <label asp-for="rucPaciente" class="control-label"></label>
+                <input asp-for="rucPaciente" class="form-control" />
+                <span asp-validation-for="rucPaciente" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="razonSocial" class="control-label"></label>
@@ -23,9 +29,9 @@
                 <span asp-validation-for="razonSocial" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="dirCliente" class="control-label"></label>
-                <input asp-for="dirCliente" class="form-control" />
-                <span asp-validation-for="dirCliente" class="text-danger"></span>
+                <label asp-for="dirPaciente" class="control-label"></label>
+                <input asp-for="dirPaciente" class="form-control" />
+                <span asp-validation-for="dirPaciente" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="idCiudad" class="control-label"></label>
@@ -33,14 +39,14 @@
                 <span asp-validation-for="idCiudad" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="idTipoCliente" class="control-label"></label>
-                <input asp-for="idTipoCliente" class="form-control" />
-                <span asp-validation-for="idTipoCliente" class="text-danger"></span>
+                <label asp-for="idTipoPaciente" class="control-label"></label>
+                <input asp-for="idTipoPaciente" class="form-control" />
+                <span asp-validation-for="idTipoPaciente" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="idEstCliente" class="control-label"></label>
-                <input asp-for="idEstCliente" class="form-control" />
-                <span asp-validation-for="idEstCliente" class="text-danger"></span>
+                <label asp-for="idEstPaciente" class="control-label"></label>
+                <input asp-for="idEstPaciente" class="form-control" />
+                <span asp-validation-for="idEstPaciente" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="fecCreacion" class="control-label"></label>

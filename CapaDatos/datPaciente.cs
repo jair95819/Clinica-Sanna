@@ -11,28 +11,30 @@ using System.Diagnostics;
 
 namespace CapaDatos
 {
-    public class datCliente
+    public class datPaciente
+
+
     {
         #region singleton
-        private static readonly datCliente UnicaInstancia = new datCliente();
+        private static readonly datPaciente UnicaInstancia = new datPaciente();
 
-        public static datCliente Instancia
+        public static datPaciente Instancia
         {
-            get { return datCliente.UnicaInstancia; }
+            get { return datPaciente.UnicaInstancia; }
         }
         #endregion singleton
 
         #region metodos
-        public List<entCliente> ListarCliente()
+        public List<entPaciente> ListarPaciente()
         {
             SqlCommand cmd = null;
-            List<entCliente> lista = new List<entCliente>();
+            List<entPaciente> lista = new List<entPaciente>();
 
             try
             {
                 SqlConnection cn = conexion.Instancia.Conectar();
 
-                cmd = new SqlCommand("spListarCliente", cn);
+                cmd = new SqlCommand("spListarPaciente", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cn.Open();
 
@@ -40,15 +42,15 @@ namespace CapaDatos
 
                 while (dr.Read())
                 {
-                    entCliente c = new entCliente();
+                    entPaciente c = new entPaciente();
 
-                    c.idCliente = Convert.ToInt32(dr["idCliente"]);
-                    c.rucCliente = Convert.ToString(dr["rucCliente"]);
+                    c.idPaciente = Convert.ToInt32(dr["idPaciente"]);
+                    c.rucPaciente = Convert.ToString(dr["rucPaciente"]);
                     c.razonSocial = Convert.ToString(dr["razonSocial"]);
-                    c.dirCliente = Convert.ToString(dr["dirCliente"]);
+                    c.dirPaciente = Convert.ToString(dr["dirPaciente"]);
                     c.idCiudad = Convert.ToInt32(dr["idCiudad"]);
-                    c.idTipoCliente = Convert.ToInt32(dr["idTipoCliente"]);
-                    c.idEstCliente = Convert.ToInt32(dr["idEstCliente"]);
+                    c.idTipoPaciente = Convert.ToInt32(dr["idTipoPaciente"]);
+                    c.idEstPaciente = Convert.ToInt32(dr["idEstPaciente"]);
 
                     lista.Add(c);
                 }
@@ -62,7 +64,7 @@ namespace CapaDatos
             return lista;
         }
 
-        public Boolean InsertarCliente(entCliente c)
+        public Boolean InsertarPaciente(entPaciente c)
         {
             SqlCommand cmd = null;
             Boolean inserta = false;
@@ -70,15 +72,15 @@ namespace CapaDatos
             {
                 SqlConnection cn = conexion.Instancia.Conectar();
 
-                cmd = new SqlCommand("spInsertarCliente", cn);
+                cmd = new SqlCommand("spInsertarPaciente", cn);
 
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@rucCliente", c.rucCliente);
+                cmd.Parameters.AddWithValue("@rucPaciente", c.rucPaciente);
                 cmd.Parameters.AddWithValue("@razonSocial", c.razonSocial);
-                cmd.Parameters.AddWithValue("@dirCliente", c.dirCliente);
+                cmd.Parameters.AddWithValue("@dirPaciente", c.dirPaciente);
                 cmd.Parameters.AddWithValue("@idCiudad", c.idCiudad);
-                cmd.Parameters.AddWithValue("@idTipoCliente", c.idTipoCliente);
-                cmd.Parameters.AddWithValue("@idEstCliente", c.idEstCliente);
+                cmd.Parameters.AddWithValue("@idTipoPaciente", c.idTipoPaciente);
+                cmd.Parameters.AddWithValue("@idEstPaciente", c.idEstPaciente);
                 cmd.Parameters.AddWithValue("@fecCreacion", c.fecCreacion);
 
                 cn.Open();
@@ -96,7 +98,7 @@ namespace CapaDatos
 
         }
 
-        public Boolean EditarCliente(entCliente c)
+        public Boolean EditarPaciente(entPaciente c)
         {
             SqlCommand cmd = null;
             Boolean edita = false;
@@ -105,15 +107,15 @@ namespace CapaDatos
             {
                 SqlConnection cn = conexion.Instancia.Conectar();
 
-                cmd = new SqlCommand("spEditarCliente", cn);
+                cmd = new SqlCommand("spEditarPaciente", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@idCliente", c.idCliente);
-                cmd.Parameters.AddWithValue("@rucCliente", c.rucCliente);
+                cmd.Parameters.AddWithValue("@idPaciente", c.idPaciente);
+                cmd.Parameters.AddWithValue("@rucPaciente", c.rucPaciente);
                 cmd.Parameters.AddWithValue("@razonSocial", c.razonSocial);
-                cmd.Parameters.AddWithValue("@dirCliente", c.dirCliente);
+                cmd.Parameters.AddWithValue("@dirPaciente", c.dirPaciente);
                 cmd.Parameters.AddWithValue("@idCiudad", c.idCiudad);
-                cmd.Parameters.AddWithValue("@idTipoCliente", c.idTipoCliente);
-                cmd.Parameters.AddWithValue("@idEstCliente", c.idEstCliente);
+                cmd.Parameters.AddWithValue("@idTipoPaciente", c.idTipoPaciente);
+                cmd.Parameters.AddWithValue("@idEstPaciente", c.idEstPaciente);
                 cmd.Parameters.AddWithValue("@fecCreacion", c.fecCreacion);
 
                 cn.Open();
@@ -132,27 +134,27 @@ namespace CapaDatos
 
         }
 
-        public entCliente BuscarCliente(int id)
+        public entPaciente BuscarPaciente(int id)
         {
             SqlCommand cmd = null;
-            entCliente c = new entCliente();
+            entPaciente c = new entPaciente();
             try
             {
                 SqlConnection cn = conexion.Instancia.Conectar();
-                cmd = new SqlCommand("spBuscarCliente", cn);
+                cmd = new SqlCommand("spBuscarPaciente", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@idCliente", id);
+                cmd.Parameters.AddWithValue("@idPaciente", id);
                 cn.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    c.idCliente = Convert.ToInt32(dr["idCliente"]);
-                    c.rucCliente = Convert.ToString(dr["rucCliente"]);
+                    c.idPaciente = Convert.ToInt32(dr["idPaciente"]);
+                    c.rucPaciente = Convert.ToString(dr["rucPaciente"]);
                     c.razonSocial = Convert.ToString(dr["razonSocial"]);
-                    c.dirCliente = Convert.ToString(dr["dirCliente"]);
+                    c.dirPaciente = Convert.ToString(dr["dirPaciente"]);
                     c.idCiudad = Convert.ToInt32(dr["idCiudad"]);
-                    c.idTipoCliente = Convert.ToInt32(dr["idTipoCliente"]);
-                    c.idEstCliente = Convert.ToInt32(dr["idEstCliente"]);
+                    c.idTipoPaciente = Convert.ToInt32(dr["idTipoPaciente"]);
+                    c.idEstPaciente = Convert.ToInt32(dr["idEstPaciente"]);
                     c.fecCreacion = Convert.ToDateTime(dr["fecCreacion"]);
                 }
             }
@@ -163,16 +165,16 @@ namespace CapaDatos
             return c;
         }
 
-        public Boolean EliminarCliente(int id)
+        public Boolean EliminarPaciente(int id)
         {
             SqlCommand cmd = null;
             Boolean elimina = false;
             try
             {
                 SqlConnection cn = conexion.Instancia.Conectar();
-                cmd = new SqlCommand("spEliminarCliente", cn);
+                cmd = new SqlCommand("spEliminarPaciente", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@idCliente", id);
+                cmd.Parameters.AddWithValue("@idPaciente", id);
                 cn.Open();
                 int i = cmd.ExecuteNonQuery();
                 if (i > 0) { elimina = true; }

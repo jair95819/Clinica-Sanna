@@ -1,27 +1,33 @@
-﻿@model CapaEntidad.entCliente
+﻿@model CapaEntidad.entPaciente
+
+
+
+
+
+
 
 @{
-    ViewData["Title"] = "EliminarCliente";
+    ViewData["Title"] = "EliminarPaciente";
 }
 
-<h1>EliminarCliente</h1>
+<h1>EliminarPaciente</h1>
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>entCliente</h4>
+    <h4>entPaciente</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.idCliente)
+            @Html.DisplayNameFor(model => model.idPaciente)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.idCliente)
+            @Html.DisplayFor(model => model.idPaciente)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.rucCliente)
+            @Html.DisplayNameFor(model => model.rucPaciente)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.rucCliente)
+            @Html.DisplayFor(model => model.rucPaciente)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.razonSocial)
@@ -30,10 +36,10 @@
             @Html.DisplayFor(model => model.razonSocial)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.dirCliente)
+            @Html.DisplayNameFor(model => model.dirPaciente)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.dirCliente)
+            @Html.DisplayFor(model => model.dirPaciente)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.idCiudad)
@@ -42,16 +48,16 @@
             @Html.DisplayFor(model => model.idCiudad)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.idTipoCliente)
+            @Html.DisplayNameFor(model => model.idTipoPaciente)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.idTipoCliente)
+            @Html.DisplayFor(model => model.idTipoPaciente)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.idEstCliente)
+            @Html.DisplayNameFor(model => model.idEstPaciente)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.idEstCliente)
+            @Html.DisplayFor(model => model.idEstPaciente)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.fecCreacion)
@@ -62,8 +68,8 @@
     </dl>
     
     
-    <form asp-action="ConfirmarEliminarCliente">
-        <input type="hidden" name="id" value="@Model.idCliente" />
+    <form asp-action="ConfirmarEliminarPaciente">
+        <input type="hidden" name="id" value="@Model.idPaciente" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

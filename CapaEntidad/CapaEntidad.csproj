@@ -46,7 +46,7 @@
     <Compile Include="entCiudad.cs" />
     <Compile Include="entEspecialidad.cs" />
     <Compile Include="entCita.cs" />
-    <Compile Include="entCliente.cs" />
+    <Compile Include="entPaciente.cs" />
     <Compile Include="entMedico.cs" />
     <Compile Include="entSede.cs" />
     <Compile Include="entUsuario.cs" />
