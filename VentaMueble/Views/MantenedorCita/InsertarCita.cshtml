@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Insertar Cita";
-    Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+    Layout = "~/Views/Shared/_LayoutPaciente.cshtml";
 }
 
 <div class="mt-4">
@@ -16,8 +16,8 @@
             <div class="col-md-6">
                 <h4>Datos del Paciente</h4>
                 <div class="form-group">
-                    <label asp-for="idPaciente" class="control-label"></label>
-                    <input asp-for="idPaciente" class="form-control" readonly />
+                    <label asp-for="PacienteID" class="control-label"></label>
+                    <input asp-for="PacienteID" class="form-control" readonly />
                 </div>
                 <div class="form-group">
                     <label asp-for="nombrePaciente" class="control-label"></label>

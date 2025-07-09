@@ -9,7 +9,7 @@ namespace CapaEntidad
     public class entCita
     {
         // Datos del Paciente
-        public int idPaciente { get; set; }
+        public int PacienteID { get; set; }
         public string nombrePaciente { get; set; }
         public string docPaciente { get; set; }
         public string telefonoPaciente { get; set; }

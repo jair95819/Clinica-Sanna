@@ -1,0 +1,85 @@
+﻿@model dynamic
+
+@{
+    ViewData["Title"] = "Registro";
+    var tipo = ViewBag.Tipousuario as string; // "Paciente" o "Medico"
+}
+
+<h4 class="mt-4 mb-3">Registro de @tipo</h4>
+<hr />
+
+<form asp-action="Registrar" method="post">
+    <input type="hidden" name="Tipousuario" value="@tipo" />
+
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" name="Email" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Contraseña</label>
+        <input type="password" name="Password" class="form-control" required />
+    </div>
+
+    @if (tipo == "Paciente")
+    {
+        <div class="mb-3">
+            <label class="form-label">Nombres</label>
+            <input type="text" name="Nombres" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Apellidos</label>
+            <input type="text" name="Apellidos" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Número de Documento</label>
+            <input type="text" name="NumDoc" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Fecha de Nacimiento</label>
+            <input type="date" name="FechaNacimiento" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Teléfono</label>
+            <input type="text" name="Telefono" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Sexo</label>
+            <select name="Sexo" class="form-select" required>
+                <option value="">Seleccione...</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+            </select>
+        </div>
+        <div class="form-check mb-3">
+            <input type="checkbox" name="Estado" class="form-check-input" checked />
+            <label class="form-check-label">Activo</label>
+        </div>
+    }
+    else if (tipo == "Medico")
+    {
+        <div class="mb-3">
+            <label class="form-label">Nombres</label>
+            <input type="text" name="Nombres" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Apellidos</label>
+            <input type="text" name="Apellidos" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Especialidad</label>
+            <input type="text" name="Especialidad" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Número de Colegio Médico</label>
+            <input type="text" name="NumColegio" class="form-control" required />
+        </div>
+        <div class="form-check mb-3">
+            <input type="checkbox" name="Estado" class="form-check-input" checked />
+            <label class="form-check-label">Activo</label>
+        </div>
+    }
+
+    <button type="submit" class="btn btn-success">Registrar</button>
+    <a asp-action="Index" asp-controller="Home" class="btn btn-secondary ms-2">Cancelar</a>
+</form>
