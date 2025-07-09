@@ -49,7 +49,6 @@ namespace VentaMueble.Controllers
                 var usuario = logUsuario.Instancia.ValidarUsuario(email, password, Tipousuario);
                 if (usuario != null)
                 {
-
                     if (Tipousuario == "Paciente")
                     {
                         // Obtengo el paciente desde el usuarioID
@@ -57,17 +56,27 @@ namespace VentaMueble.Controllers
 
                         if (paciente != null)
                         {
-                            // Guardo el nombre en sesión (puedes guardar más datos si quieres)
+                            // Verificar si el paciente está habilitado
+                            if (!paciente.Estado)
+                            {
+                                ViewBag.Error = "Tu cuenta está deshabilitada. Contacta al administrador.";
+                                return View();
+                            }
+
+                            // Si está habilitado, guardar datos en sesión
                             HttpContext.Session.SetString("NombrePaciente", paciente.Nombres);
+                            HttpContext.Session.SetInt32("PacienteID", paciente.PacienteID);
                         }
 
-                        return RedirectToAction("DashboardPaciente", "DashboardPaciente");
+                        return RedirectToAction("Index", "DashboardPaciente");
                     }
-
                     else if (Tipousuario == "Medico")
                         return RedirectToAction("ListarMedico", "MantenedorMedico");
                     else if (Tipousuario == "Administrador")
-                        return RedirectToAction("Index", "Admin");
+                    {
+                        HttpContext.Session.SetString("NombreAdministrador", "Administrador");
+                        return RedirectToAction("Index", "DashboardAdministrador");
+                    }
                     else
                     {
                         ViewBag.Error = "Tipo de usuario inválido.";
@@ -86,6 +95,7 @@ namespace VentaMueble.Controllers
                 return View();
             }
         }
+
 
 
         // GET MostrarRegistro -> muestra vista con tipo de usuario

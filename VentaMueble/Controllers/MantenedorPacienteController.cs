@@ -155,6 +155,59 @@ namespace VentaMueble.Controllers
                 return RedirectToAction("ListarPaciente");
             }
         }
+        public IActionResult Perfil()
+        {
+            // Obtén el ID del paciente desde la sesión
+            int? pacienteId = HttpContext.Session.GetInt32("PacienteID");
+
+            if (pacienteId == null)
+            {
+                // No está logueado, redirige al login
+                return RedirectToAction("Login", "Home");
+            }
+
+            var paciente = logPaciente.Instancia.BuscarPaciente(pacienteId.Value);
+            return View(paciente);
+        }
+
+        [HttpPost]
+        public IActionResult Perfil(entPaciente c)
+        {
+            try
+            {
+                var pacienteActual = logPaciente.Instancia.BuscarPaciente(c.PacienteID);
+                if (pacienteActual == null)
+                {
+                    ViewBag.Error = "Paciente no encontrado.";
+                    return View(c);
+                }
+
+                // Solo actualiza campos que puede cambiar
+                pacienteActual.Nombres = c.Nombres;
+                pacienteActual.Apellidos = c.Apellidos;
+                pacienteActual.NumDoc = c.NumDoc;
+                pacienteActual.FechaNacimiento = c.FechaNacimiento;
+                pacienteActual.Telefono = c.Telefono;
+                pacienteActual.Sexo = c.Sexo;
+
+                bool edita = logPaciente.Instancia.EditarPaciente(pacienteActual);
+                if (edita)
+                {
+                    ViewBag.Mensaje = "Datos actualizados correctamente.";
+                }
+                else
+                {
+                    ViewBag.Error = "No se pudo actualizar.";
+                }
+
+                return View(pacienteActual);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Error: " + ex.Message;
+                return View(c);
+            }
+        }
 
     }
 }

@@ -4,7 +4,7 @@ namespace VentaMueble.Controllers
 {
     public class DashboardPacienteController : Controller
     {
-        public IActionResult DashboardPaciente()
+        public IActionResult Index()
         {
             // Puedes enviar TempData para mostrar el mensaje si quieres
             if (TempData["InicioExitoso"] != null)

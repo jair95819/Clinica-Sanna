@@ -48,10 +48,11 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-calendar-check"></i></div>
                             Mis Citas
                         </a>
-                        <a class="nav-link" href="@Url.Action("Perfil","Usuario")">
+                        <a class="nav-link" href="@Url.Action("Perfil", "MantenedorPaciente")">
                             <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                             Perfil
                         </a>
+
                         <a class="nav-link" href="@Url.Action("CerrarSesion", "Cuenta")">
                             <div class="sb-nav-link-icon"><i class="fas fa-sign-out-alt"></i></div>
                             Cerrar Sesión
@@ -87,5 +88,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/scripts.js"></script>
+    @RenderSection("Scripts", required: false)
+
 </body>
 </html>

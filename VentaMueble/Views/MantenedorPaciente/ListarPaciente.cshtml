@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<CapaEntidad.entPaciente>
-
 @{
+    Layout = "_LayoutAdministrador";
     ViewData["Title"] = "Listar Pacientes";
 }
 
@@ -28,13 +28,13 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.PacienteID)</td>
-                <td>@Html.DisplayFor(modelItem => item.Nombres)</td>
-                <td>@Html.DisplayFor(modelItem => item.Apellidos)</td>
-                <td>@Html.DisplayFor(modelItem => item.NumDoc)</td>
+                <td>@item.PacienteID</td>
+                <td>@item.Nombres</td>
+                <td>@item.Apellidos</td>
+                <td>@item.NumDoc</td>
                 <td>@item.FechaNacimiento.ToString("yyyy-MM-dd")</td>
-                <td>@Html.DisplayFor(modelItem => item.Telefono)</td>
-                <td>@Html.DisplayFor(modelItem => item.Sexo)</td>
+                <td>@item.Telefono</td>
+                <td>@item.Sexo</td>
                 <td>@(item.Estado ? "Activo" : "Inactivo")</td>
                 <td>
                     @Html.ActionLink("Editar", "EditarPaciente", new { id = item.PacienteID }, new { @class = "btn btn-sm btn-primary me-2" })

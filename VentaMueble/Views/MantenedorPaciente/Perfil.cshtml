@@ -1,17 +1,24 @@
 ﻿@model CapaEntidad.entPaciente
 @{
-    Layout = "_LayoutAdministrador";
-    ViewData["Title"] = "Editar Paciente";
+    Layout = "_LayoutPaciente";
+    ViewData["Title"] = "Mi Perfil";
 }
 
-<h4 class="mt-4 mb-3">Editar datos del paciente</h4>
+<h4 class="mt-4 mb-3">Mi Perfil</h4>
 <hr />
+
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-success">@ViewBag.Mensaje</div>
+}
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
 
 <div class="row">
     <div class="col-md-6">
-        <form asp-action="EditarPaciente" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-
+        <form asp-action="Perfil" method="post">
             <input asp-for="PacienteID" type="hidden" />
 
             <div class="mb-3">
@@ -54,14 +61,7 @@
                 <span asp-validation-for="Sexo" class="text-danger"></span>
             </div>
 
-            <div class="form-check mb-3">
-                <input asp-for="Estado" class="form-check-input" />
-                <label asp-for="Estado" class="form-check-label">Activo</label>
-                <span asp-validation-for="Estado" class="text-danger"></span>
-            </div>
-
             <button type="submit" class="btn btn-primary">Guardar cambios</button>
-            <a asp-action="ListarPaciente" class="btn btn-secondary ms-2">Cancelar</a>
         </form>
     </div>
 </div>
