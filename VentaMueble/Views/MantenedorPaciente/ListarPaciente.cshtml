@@ -1,0 +1,46 @@
+﻿@model IEnumerable<CapaEntidad.entPaciente>
+
+@{
+    ViewData["Title"] = "Listar Pacientes";
+}
+
+<h4 class="mt-4 mb-3">Listado de Pacientes</h4>
+
+<p>
+    @Html.ActionLink("Insertar nuevo paciente", "InsertarPaciente", null, new { @class = "btn btn-success mb-3" })
+</p>
+
+<table class="table table-bordered table-striped table-hover">
+    <thead class="table-primary">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.PacienteID)</th>
+            <th>@Html.DisplayNameFor(model => model.Nombres)</th>
+            <th>@Html.DisplayNameFor(model => model.Apellidos)</th>
+            <th>@Html.DisplayNameFor(model => model.NumDoc)</th>
+            <th>@Html.DisplayNameFor(model => model.FechaNacimiento)</th>
+            <th>@Html.DisplayNameFor(model => model.Telefono)</th>
+            <th>@Html.DisplayNameFor(model => model.Sexo)</th>
+            <th>@Html.DisplayNameFor(model => model.Estado)</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.PacienteID)</td>
+                <td>@Html.DisplayFor(modelItem => item.Nombres)</td>
+                <td>@Html.DisplayFor(modelItem => item.Apellidos)</td>
+                <td>@Html.DisplayFor(modelItem => item.NumDoc)</td>
+                <td>@item.FechaNacimiento.ToString("yyyy-MM-dd")</td>
+                <td>@Html.DisplayFor(modelItem => item.Telefono)</td>
+                <td>@Html.DisplayFor(modelItem => item.Sexo)</td>
+                <td>@(item.Estado ? "Activo" : "Inactivo")</td>
+                <td>
+                    @Html.ActionLink("Editar", "EditarPaciente", new { id = item.PacienteID }, new { @class = "btn btn-sm btn-primary me-2" })
+                    @Html.ActionLink("Deshabilitar", "DeshabilitarPaciente", new { id = item.PacienteID }, new { @class = "btn btn-sm btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

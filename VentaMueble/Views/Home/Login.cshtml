@@ -5,8 +5,8 @@
 <!-- Pills navs -->
 <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
     <li class="nav-item" role="presentation">
-        <a class="nav-link active" id="tab-cliente" data-bs-toggle="pill" href="#pills-cliente" role="tab"
-           aria-controls="pills-cliente" aria-selected="true">Cliente</a>
+        <a class="nav-link active" id="tab-Paciente" data-bs-toggle="pill" href="#pills-Paciente" role="tab"
+           aria-controls="pills-Paciente" aria-selected="true">Paciente</a>
     </li>
     <li class="nav-item" role="presentation">
         <a class="nav-link" id="tab-medico" data-bs-toggle="pill" href="#pills-medico" role="tab"
@@ -21,25 +21,37 @@
 <!-- Pills content -->
 <div class="tab-content-container">
     <div class="tab-content">
-        <!-- Cliente Tab -->
-        <div class="tab-pane fade show active" id="pills-cliente" role="tabpanel" aria-labelledby="tab-cliente">
+
+        @if (TempData["RegistroExitoso"] != null)
+        {
+            <div class="alert alert-success text-center">
+                @TempData["RegistroExitoso"]
+            </div>
+        }
+
+        <!-- Paciente Tab -->
+        <div class="tab-pane fade show active" id="pills-Paciente" role="tabpanel" aria-labelledby="tab-Paciente">
             <div class="text-center mb-4">
-                <h4 class="text-primary">Acceso para Clientes</h4>
+                <h4 class="text-primary">Acceso para Pacientes</h4>
                 <p class="text-muted">Ingresa a tu cuenta para gestionar tus citas médicas</p>
             </div>
-            <form>
-                <!-- Email input -->
+            <form asp-action="Login" method="post">
+                <input type="hidden" name="Tipousuario" value="Paciente" />
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="clienteEmail">Email</label>
-                    <input type="email" id="clienteEmail" class="form-control" />
+                    <label class="form-label" for="PacienteEmail">Email</label>
+                    <input type="email" id="PacienteEmail" name="email" class="form-control" />
                 </div>
-                <!-- Password input -->
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="clientePassword">Contraseña</label>
-                    <input type="password" id="clientePassword" class="form-control" />
+                    <label class="form-label" for="PacientePassword">Contraseña</label>
+                    <input type="password" id="PacientePassword" name="password" class="form-control" />
                 </div>
-                <!-- Submit button -->
-                <button type="submit" class="btn btn-primary w-100 mb-4">Iniciar Sesión como Cliente</button>
+                <button type="submit" class="btn btn-primary w-100 mb-4">Iniciar Sesión como Paciente</button>
+                <div class="text-center mt-3">
+                    ¿No tienes cuenta?
+                    <a href="@Url.Action("MostrarRegistro", "Home", new { tipo = "Paciente" })">Registrarse</a>
+                </div>
+
+
             </form>
         </div>
 
@@ -49,19 +61,23 @@
                 <h4 class="text-success">Acceso para Médicos</h4>
                 <p class="text-muted">Portal profesional para consultas y diagnósticos</p>
             </div>
-            <form>
-                <!-- Email input -->
+            <form asp-action="Login" method="post">
+                <input type="hidden" name="Tipousuario" value="Medico" />
                 <div class="form-outline mb-4">
-                    <input type="email" id="medicoEmail" class="form-control" />
                     <label class="form-label" for="medicoEmail">Email Profesional</label>
+                    <input type="email" id="medicoEmail" name="email" class="form-control" />
                 </div>
-                <!-- Password input -->
                 <div class="form-outline mb-4">
-                    <input type="password" id="medicoPassword" class="form-control" />
                     <label class="form-label" for="medicoPassword">Contraseña</label>
+                    <input type="password" id="medicoPassword" name="password" class="form-control" />
                 </div>
-                <!-- Submit button -->
                 <button type="submit" class="btn btn-success w-100 mb-4">Acceso Profesional</button>
+                <div class="text-center mt-3">
+                    ¿No tienes cuenta?
+                    <a href="@Url.Action("MostrarRegistro", "Home", new { tipo = "Medico" })">Registrarse</a>
+                </div>
+
+
             </form>
         </div>
 
@@ -71,19 +87,18 @@
                 <h4 class="text-warning">Panel de Administración</h4>
                 <p class="text-muted">Acceso restringido al sistema de gestión</p>
             </div>
-            <form>
-                <!-- Usuario input -->
+            <form asp-action="Login" method="post">
+                <input type="hidden" name="Tipousuario" value="Administrador" />
                 <div class="form-outline mb-4">
-                    <input type="text" id="adminUsuario" class="form-control" />
                     <label class="form-label" for="adminUsuario">Usuario Administrador</label>
+                    <input type="text" id="adminUsuario" name="email" class="form-control" />
                 </div>
-                <!-- Password input -->
                 <div class="form-outline mb-4">
-                    <input type="password" id="adminPassword" class="form-control" />
                     <label class="form-label" for="adminPassword">Contraseña</label>
+                    <input type="password" id="adminPassword" name="password" class="form-control" />
                 </div>
-                <!-- Submit button -->
                 <button type="submit" class="btn btn-warning w-100 mb-4">Acceso Administrativo</button>
+
             </form>
         </div>
     </div>

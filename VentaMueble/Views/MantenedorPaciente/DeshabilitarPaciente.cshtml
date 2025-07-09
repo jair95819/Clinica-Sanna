@@ -1,0 +1,41 @@
+﻿@model CapaEntidad.entPaciente
+
+@{
+    ViewData["Title"] = "Deshabilitar Paciente";
+}
+
+<h4 class="mt-4 mb-3 text-danger">¿Estás seguro que deseas deshabilitar este paciente?</h4>
+<hr />
+
+<dl class="row">
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.PacienteID)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(model => model.PacienteID)</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Nombres)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(model => model.Nombres)</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Apellidos)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(model => model.Apellidos)</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.NumDoc)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(model => model.NumDoc)</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.FechaNacimiento)</dt>
+    <dd class="col-sm-9">@Model.FechaNacimiento.ToString("yyyy-MM-dd")</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Telefono)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(model => model.Telefono)</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Sexo)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(model => model.Sexo)</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Estado)</dt>
+    <dd class="col-sm-9">@(Model.Estado ? "Activo" : "Inactivo")</dd>
+</dl>
+
+<form asp-action="ConfirmarDeshabilitarPaciente" method="post">
+    <input type="hidden" name="id" value="@Model.PacienteID" />
+    <button type="submit" class="btn btn-warning">Deshabilitar</button>
+    <a asp-action="ListarPaciente" class="btn btn-secondary ms-2">Cancelar</a>
+</form>
+
