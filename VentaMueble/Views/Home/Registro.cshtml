@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Registro de Paciente";
+}
+
+<h2>Registro de Paciente</h2>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="rucPaciente">RUC del Paciente</label>
+        <input type="text" class="form-control" id="rucPaciente" name="rucPaciente" required />
+    </div>
+
+    <div class="form-group">
+        <label for="razonSocial">Razón Social</label>
+        <input type="text" class="form-control" id="razonSocial" name="razonSocial" required />
+    </div>
+
+    <div class="form-group">
+        <label for="dirPaciente">Dirección</label>
+        <input type="text" class="form-control" id="dirPaciente" name="dirPaciente" required />
+    </div>
+
+    <div class="form-group">
+        <label for="idCiudad">Ciudad</label>
+        <input type="number" class="form-control" id="idCiudad" name="idCiudad" required />
+    </div>
+
+    <div class="form-group">
+        <label for="idTipoPaciente">Tipo de Paciente</label>
+        <input type="number" class="form-control" id="idTipoPaciente" name="idTipoPaciente" required />
+    </div>
+
+    <div class="form-group">
+        <label for="idEstPaciente">Estado de Paciente</label>
+        <input type="number" class="form-control" id="idEstPaciente" name="idEstPaciente" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Registrar Paciente</button>
+</form>

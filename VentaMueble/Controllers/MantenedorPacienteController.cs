@@ -17,9 +17,8 @@ namespace VentaMueble.Controllers
 
         public IActionResult ListarPaciente()
         {
-            List<entPaciente> list = new List<entPaciente>();
-           
-            list = logPaciente.Instancia.ListarPaciente();
+            List<entPaciente> list = logPaciente.Instancia.ListarPaciente();
+
             if (list.Count == 0)
             {
                 _logger.LogWarning("No se encontraron Pacientes en la base de datos.");
@@ -28,76 +27,85 @@ namespace VentaMueble.Controllers
             {
                 _logger.LogInformation($"Se encontraron {list.Count} Pacientes.");
             }
+
             ViewBag.Lista = list;
             return View(list);
         }
 
+        // Acción para mostrar el formulario de registro
         [HttpGet]
-        public IActionResult InsertarPaciente()
+        public IActionResult RegistrarPaciente()
         {
             return View();
         }
 
+        // Acción para manejar el registro de un paciente
         [HttpPost]
-        public ActionResult InsertarPaciente(entPaciente c)
+        public IActionResult RegistrarPaciente(entPaciente paciente)
         {
             try
             {
-                Boolean inserta = logPaciente.Instancia.InsertarPaciente(c);
+                // Establecemos la fecha de creación del paciente
+                paciente.fecCreacion = DateTime.Now;
 
-                if (inserta)
+                // Llamamos al servicio para insertar el paciente
+                bool registrado = logPaciente.Instancia.InsertarPaciente(paciente);
+
+                if (registrado)
                 {
-                    return RedirectToAction("ListarPaciente");
+                    return RedirectToAction("ListarPaciente");  // Redirige al listado de pacientes
                 }
-
                 else
                 {
-                    return View(c);
+                    ViewBag.ErrorMessage = "Hubo un error al registrar al paciente.";
+                    return View();
                 }
             }
-
-
-            catch (ApplicationException ex)
+            catch (Exception ex)
             {
-                return RedirectToAction("InsertarPaciente", new { mesjExceptio = ex.Message });
+                // Manejo de excepciones
+                ViewBag.ErrorMessage = $"Error: {ex.Message}";
+                return View();
             }
         }
 
+        // Acción para editar paciente
         [HttpGet]
         public IActionResult EditarPaciente(int id)
         {
-            // Aquí llamas a tu lógica de negocio o acceso a datos
-            var Paciente = logPaciente.Instancia.BuscarPaciente(id); // Método de ejemplo
-            return View(Paciente);
+            var paciente = logPaciente.Instancia.BuscarPaciente(id);
+            return View(paciente);
         }
 
         [HttpPost]
-        public ActionResult EditarPaciente(entPaciente c)
+        public IActionResult EditarPaciente(entPaciente paciente)
         {
             try
             {
-                Boolean edita = logPaciente.Instancia.EditarPaciente(c);
+                bool edita = logPaciente.Instancia.EditarPaciente(paciente);
+
                 if (edita)
                 {
                     return RedirectToAction("ListarPaciente");
                 }
                 else
                 {
-                    return View(c);
+                    return View(paciente);
                 }
             }
-            catch (ApplicationException ex)
+            catch (Exception ex)
             {
-                return RedirectToAction("EditarPaciente", new { mesjExceptio = ex.Message });
+                ViewBag.ErrorMessage = $"Error: {ex.Message}";
+                return View(paciente);
             }
         }
 
+        // Acción para eliminar paciente
         [HttpGet]
         public IActionResult EliminarPaciente(int id)
         {
-            // Aquí llamas a tu lógica de negocio o acceso a datos
-            var Paciente = logPaciente.Instancia.BuscarPaciente(id); // Método de ejemplo
-            return View(Paciente);
+            var paciente = logPaciente.Instancia.BuscarPaciente(id);
+            return View(paciente);
         }
 
         [HttpPost]
@@ -105,7 +113,8 @@ namespace VentaMueble.Controllers
         {
             try
             {
-                Boolean elimina = logPaciente.Instancia.EliminarPaciente(id);
+                bool elimina = logPaciente.Instancia.EliminarPaciente(id);
+
                 if (elimina)
                 {
                     return RedirectToAction("ListarPaciente");
@@ -115,9 +124,10 @@ namespace VentaMueble.Controllers
                     return RedirectToAction("ListarPaciente");
                 }
             }
-            catch (ApplicationException ex)
+            catch (Exception ex)
             {
-                return RedirectToAction("ListarPaciente", new { mesjExceptio = ex.Message });
+                ViewBag.ErrorMessage = $"Error: {ex.Message}";
+                return RedirectToAction("ListarPaciente");
             }
         }
     }
