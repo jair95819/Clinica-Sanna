@@ -113,9 +113,6 @@ namespace VentaMueble.Controllers
             }
         }
 
-
-
-
         // GET MostrarRegistro -> muestra vista con tipo de usuario
         [HttpGet]
         public IActionResult MostrarRegistro(string tipo)
@@ -124,7 +121,6 @@ namespace VentaMueble.Controllers
             return View();
         }
 
-        // POST Registrar
         // POST Registrar
         [HttpPost]
         public IActionResult Registrar(IFormCollection form)
@@ -195,7 +191,7 @@ namespace VentaMueble.Controllers
                         FechaNacimiento = DateTime.Parse(form["FechaNacimiento"]),
                         Telefono = form["Telefono"],
                         Sexo = form["Sexo"],
-                        Estado = form["Estado"] == "on" // Si está activado el checkbox
+                        Estado = true // Si está activado el checkbox
                     };
 
                     bool inserta = logPaciente.Instancia.InsertarPaciente(paciente);
