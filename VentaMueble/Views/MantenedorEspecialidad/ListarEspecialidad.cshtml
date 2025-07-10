@@ -1,0 +1,37 @@
+﻿@model IEnumerable<CapaEntidad.entEspecialidad>
+
+@{
+    Layout = "_LayoutAdministrador";
+    ViewData["Title"] = "Listar Especialidades";
+}
+
+<h4 class="mt-4 mb-3">Listado de Especialidades</h4>
+
+<p>
+    @Html.ActionLink("Insertar nueva especialidad", "InsertarEspecialidad", null, new { @class = "btn btn-success mb-3" })
+</p>
+
+<table class="table table-bordered table-striped table-hover">
+    <thead class="table-primary">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.EspecialidadID)</th>
+            <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+            <th>@Html.DisplayNameFor(model => model.Estado)</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.EspecialidadID</td>
+                <td>@item.Nombre</td>
+                <td>@(item.Estado ? "Activo" : "Inactivo")</td>
+                <td>
+                    @Html.ActionLink("Editar", "EditarEspecialidad", new { id = item.EspecialidadID }, new { @class = "btn btn-sm btn-primary me-2" })
+                    @Html.ActionLink("Eliminar", "EliminarEspecialidad", new { id = item.EspecialidadID }, new { @class = "btn btn-sm btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
