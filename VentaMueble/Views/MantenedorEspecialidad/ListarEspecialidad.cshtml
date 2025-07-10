@@ -29,9 +29,10 @@
                 <td>@(item.Estado ? "Activo" : "Inactivo")</td>
                 <td>
                     @Html.ActionLink("Editar", "EditarEspecialidad", new { id = item.EspecialidadID }, new { @class = "btn btn-sm btn-primary me-2" })
-                    @Html.ActionLink("Eliminar", "EliminarEspecialidad", new { id = item.EspecialidadID }, new { @class = "btn btn-sm btn-danger" })
+                    @Html.ActionLink("Deshabilitar", "DeshabilitarEspecialidad", new { id = item.EspecialidadID }, new { @class = "btn btn-sm btn-danger" })
                 </td>
             </tr>
         }
+
     </tbody>
 </table>

@@ -36,9 +36,9 @@ namespace CapaLogica
             return datEspecialidad.Instancia.BuscarEspecialidad(id);
         }
 
-        public bool EliminarEspecialidad(int id)
+        public bool DeshabilitarEspecialidad(int id)
         {
-            return datEspecialidad.Instancia.EliminarEspecialidad(id);
+            return datEspecialidad.Instancia.DeshabilitarEspecialidad(id);
         }
         #endregion
     }

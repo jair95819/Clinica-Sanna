@@ -1,5 +1,26 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model CapaEntidad.entEspecialidad
+
 @{
+    Layout = "_LayoutAdministrador";
+    ViewData["Title"] = "Deshabilitar Especialidad";
 }
+
+<h4 class="mt-4 mb-3 text-danger">¿Estás seguro que deseas deshabilitar esta especialidad?</h4>
+<hr />
+
+<dl class="row">
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.EspecialidadID)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(model => model.EspecialidadID)</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Nombre)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(model => model.Nombre)</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Estado)</dt>
+    <dd class="col-sm-9">@(Model.Estado ? "Activo" : "Inactivo")</dd>
+</dl>
+
+<form asp-action="ConfirmarDeshabilitarEspecialidad" method="post">
+    <input type="hidden" name="id" value="@Model.EspecialidadID" />
+    <button type="submit" class="btn btn-warning">Deshabilitar</button>
+    <a asp-action="ListarEspecialidad" class="btn btn-secondary ms-2">Cancelar</a>
+</form>

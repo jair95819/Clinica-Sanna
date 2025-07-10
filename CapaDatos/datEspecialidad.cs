@@ -133,10 +133,10 @@ namespace CapaDatos
             return e;
         }
 
-        public bool EliminarEspecialidad(int id)
+        public bool DeshabilitarEspecialidad(int id)
         {
             SqlCommand cmd = null;
-            bool elimina = false;
+            bool deshabilita = false;
 
             try
             {
@@ -147,14 +147,14 @@ namespace CapaDatos
 
                 cn.Open();
                 int i = cmd.ExecuteNonQuery();
-                elimina = (i > 0);
+                deshabilita = (i > 0);
             }
             catch (Exception ex)
             { throw ex; }
             finally
             { cmd?.Connection?.Close(); }
 
-            return elimina;
+            return deshabilita;
         }
 
         #endregion
