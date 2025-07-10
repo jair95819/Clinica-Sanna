@@ -108,7 +108,6 @@ namespace VentaMueble.Controllers
 
         // POST Registrar
         [HttpPost]
-
         public IActionResult Registrar(IFormCollection form)
         {
             var tipo = form["Tipousuario"];
@@ -117,25 +116,23 @@ namespace VentaMueble.Controllers
 
             try
             {
-                // 1. Insertar en Usuario
                 var nuevoUsuario = new entUsuario
                 {
                     Email = email,
                     Password = password,
-                    TipousuarioID = tipo == "Medico" ? 2 : 1 // Suponiendo 2 = Medico, 1 = Paciente
+                    TipousuarioID = tipo == "Medico" ? 2 : 1
                 };
 
                 int nuevoUsuarioID = logUsuario.Instancia.InsertarUsuarioYDevolverID(nuevoUsuario);
                 if (nuevoUsuarioID <= 0)
                 {
-                    ViewBag.Error = "Error al crear el usuario. ID no válido.";
+                    ViewBag.Error = "Error al crear el usuario.";
                     ViewBag.Tipousuario = tipo;
                     return View("MostrarRegistro");
                 }
 
                 if (tipo == "Paciente")
                 {
-                    // 2. Insertar en Paciente
                     var paciente = new entPaciente
                     {
                         UsuarioID = nuevoUsuarioID,
@@ -145,31 +142,33 @@ namespace VentaMueble.Controllers
                         FechaNacimiento = DateTime.Parse(form["FechaNacimiento"]),
                         Telefono = form["Telefono"],
                         Sexo = form["Sexo"],
-                        Estado = form["Estado"] == "on" // checkbox devuelve "on"
+                        Estado = form["Estado"] == "on"
                     };
 
                     bool inserta = logPaciente.Instancia.InsertarPaciente(paciente);
                     if (inserta)
-                        return RedirectToAction("ListarPaciente", "MantenedorPaciente");
-                }
-                /*else if (tipo == "Medico")
-                {
-                    var medico = new entMedico
                     {
-                        UsuarioID = nuevoUsuarioID,
-                        Nombres = form["Nombres"],
-                        Apellidos = form["Apellidos"],
-                        Especialidad = form["Especialidad"],
-                        NumColegio = form["NumColegio"],
-                        Estado = form["Estado"] == "on"
-                    };
+                        // Recuperar paciente para obtener ID
+                        var pacienteCreado = logPaciente.Instancia.ObtenerPacientePorUsuarioID(nuevoUsuarioID);
+                        if (pacienteCreado != null)
+                        {
+                            HttpContext.Session.SetString("NombrePaciente", pacienteCreado.Nombres);
+                            HttpContext.Session.SetInt32("PacienteID", pacienteCreado.PacienteID);
+                        }
 
-                    bool inserta = logMedico.Instancia.InsertarMedico(medico);
-                    if (inserta)
-                        return RedirectToAction("ListarMedico", "MantenedorMedico");
-                }*/
+                        // Redirigir a su dashboard
+                        return RedirectToAction("Index", "DashboardPaciente");
+                    }
+                    else
+                    {
+                        ViewBag.Error = "No se pudo registrar el paciente.";
+                        ViewBag.Tipousuario = tipo;
+                        return View("MostrarRegistro");
+                    }
+                }
 
-                ViewBag.Error = "No se pudo registrar el usuario.";
+                // TODO: Agregar registro de médico si lo necesitas
+                ViewBag.Error = "Tipo de usuario no soportado.";
                 ViewBag.Tipousuario = tipo;
                 return View("MostrarRegistro");
             }
@@ -180,6 +179,7 @@ namespace VentaMueble.Controllers
                 return View("MostrarRegistro");
             }
         }
+
 
 
 
