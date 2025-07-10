@@ -43,8 +43,8 @@ namespace CapaDatos
                     var c = new entPaciente
                     {
                         PacienteID = Convert.ToInt32(dr["PacienteID"]),
-                        Nombres = Convert.ToString(dr["Nombres"]),
-                        Apellidos = Convert.ToString(dr["Apellidos"]),
+                        Nombres = Convert.ToString(dr["Nombre"]),
+                        Apellidos = Convert.ToString(dr["Apellido"]),
                         NumDoc = Convert.ToString(dr["NumDoc"]),
                         FechaNacimiento = Convert.ToDateTime(dr["FechaNacimiento"]),
                         Telefono = Convert.ToString(dr["Telefono"]),
@@ -158,8 +158,8 @@ namespace CapaDatos
                     c = new entPaciente
                     {
                         PacienteID = Convert.ToInt32(dr["PacienteID"]),
-                        Nombres = Convert.ToString(dr["Nombres"]),
-                        Apellidos = Convert.ToString(dr["Apellidos"]),
+                        Nombres = Convert.ToString(dr["Nombre"]),
+                        Apellidos = Convert.ToString(dr["Apellido"]),
                         NumDoc = Convert.ToString(dr["NumDoc"]),
                         FechaNacimiento = Convert.ToDateTime(dr["FechaNacimiento"]),
                         Telefono = Convert.ToString(dr["Telefono"]),
@@ -226,8 +226,8 @@ namespace CapaDatos
                     {
                         PacienteID = Convert.ToInt32(dr["PacienteID"]),
                         UsuarioID = Convert.ToInt32(dr["UsuarioID"]),
-                        Nombres = Convert.ToString(dr["Nombres"]),
-                        Apellidos = Convert.ToString(dr["Apellidos"]),
+                        Nombres = Convert.ToString(dr["Nombre"]),
+                        Apellidos = Convert.ToString(dr["Apellido"]),
                         NumDoc = Convert.ToString(dr["NumDoc"]),
                         FechaNacimiento = Convert.ToDateTime(dr["FechaNacimiento"]),
                         Telefono = Convert.ToString(dr["Telefono"]),

@@ -49,6 +49,7 @@
     <Compile Include="entPaciente.cs" />
     <Compile Include="entMedico.cs" />
     <Compile Include="entSede.cs" />
+    <Compile Include="entTipoCita.cs" />
     <Compile Include="entUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="entTipousuario.cs" />
