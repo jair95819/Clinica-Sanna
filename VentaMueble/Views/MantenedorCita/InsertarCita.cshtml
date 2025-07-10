@@ -12,44 +12,43 @@
 
     <form asp-action="InsertarCita">
         <div class="row">
-            <!-- Datos del Paciente -->
             <div class="col-md-6">
-                <h4>Datos del Paciente</h4>
+                <h4>Tipo de Cita</h4>
+                <select asp-for="tCita" asp-items="ViewBag.TipoCita" class="form-control">
+                    <option value="">Seleccione un tipo de cita</option>
+                </select>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <!-- Sede -->
+            <div class="col-md-4">
+                <h4>Sede</h4>
                 <div class="form-group">
-                    <label asp-for="PacienteID" class="control-label"></label>
-                    <input asp-for="PacienteID" class="form-control" readonly />
-                </div>
-                <div class="form-group">
-                    <label asp-for="nombrePaciente" class="control-label"></label>
-                    <input asp-for="nombrePaciente" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="docPaciente" class="control-label"></label>
-                    <input asp-for="docPaciente" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="telefonoPaciente" class="control-label"></label>
-                    <input asp-for="telefonoPaciente" class="form-control" />
+                    <select asp-for="sedeCita" asp-items="ViewBag.ListaSedes" class="form-control">
+                        <option value="">Seleccione Sede</option>
+                    </select>
                 </div>
             </div>
 
-            <!-- Datos del Médico -->
-            <div class="col-md-6">
-                <h4>Datos del Médico</h4>
+            <!-- Especialidad-->
+            <div class="col-md-4">
+                <h4>Especialidad</h4>
                 <div class="form-group">
-                    <label asp-for="idMedico" class="control-label"></label>
-                    <input asp-for="idMedico" class="form-control" readonly />
-                </div>
-                <div class="form-group">
-                    <label asp-for="nombreMedico" class="control-label"></label>
-                    <select asp-for="nombreMedico" asp-items="ViewBag.ListaMedicos" class="form-control" disabled="false">
-                        <option value="">Seleccione un médico</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label asp-for="especialidadMedico" class="control-label"></label>
                     <select asp-for="especialidadMedico" asp-items="ViewBag.ListaEspecialidades" class="form-control" disabled="false">
                         <option value="">Seleccione especialidad</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Medico -->
+            <div class="col-md-4">
+                <h4>Médico</h4>
+                <div class="form-group">
+                    <select asp-for="nombreMedico" asp-items="ViewBag.ListaMedico" class="form-control" disabled="false">
+                        <option value="">Seleccione Medico</option>
                     </select>
                 </div>
             </div>
@@ -60,32 +59,11 @@
         <!-- Detalles de la Cita -->
         <div class="row">
             <div class="col-md-6">
-                <h4>Detalles de la Cita</h4>
+                <h4>Turno de la Cita</h4>
                 <div class="form-group">
-                    <label asp-for="idCita" class="control-label"></label>
-                    <input asp-for="idCita" class="form-control" readonly />
-                </div>
-                <div class="form-group">
-                    <label asp-for="fCita" class="control-label">Fecha</label>
-                    <select asp-for="fCita" asp-items="ViewBag.ListaFechas" class="form-control">
-                        <option value="">Seleccione una fecha</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label asp-for="hCita" class="control-label">Hora</label>
                     <select asp-for="hCita" asp-items="ViewBag.ListaHoras" class="form-control">
                         <option value="">Seleccione una hora</option>
                     </select>
-                </div>
-                <div class="form-group">
-                    <label asp-for="sedeCita" class="control-label">Sede</label>
-                    <select asp-for="sedeCita" asp-items="ViewBag.ListaSedes" class="form-control">
-                        <option value="">Seleccione una sede</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label asp-for="consCita" class="control-label">Consultorio</label>
-                    <input asp-for="consCita" class="form-control" readonly />
                 </div>
             </div>
         </div>

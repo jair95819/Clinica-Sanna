@@ -23,6 +23,7 @@ namespace CapaEntidad
         public int idCita { get; set; }
         public string fCita { get; set; }
         public string hCita { get; set; }
+        public int tCita { get; set; } // Cambiar a int nullable
         public string sedeCita { get; set; }
         public string consCita { get; set; }
     }
