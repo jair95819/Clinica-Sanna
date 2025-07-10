@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Registro";
-    var tipo = ViewBag.Tipousuario as string; // "Paciente" o "Medico"
+    var tipo = ViewData["Tipousuario"] as string; // "Paciente" o "Medico"
 }
 
 <h4 class="mt-4 mb-3">Registro de @tipo</h4>
@@ -11,11 +11,13 @@
 <form asp-action="Registrar" method="post">
     <input type="hidden" name="Tipousuario" value="@tipo" />
 
+    <!-- Correo Electrónico -->
     <div class="mb-3">
         <label class="form-label">Email</label>
         <input type="email" name="Email" class="form-control" required />
     </div>
 
+    <!-- Contraseña -->
     <div class="mb-3">
         <label class="form-label">Contraseña</label>
         <input type="password" name="Password" class="form-control" required />
@@ -23,6 +25,7 @@
 
     @if (tipo == "Paciente")
     {
+        <!-- Campos de Paciente -->
         <div class="mb-3">
             <label class="form-label">Nombres</label>
             <input type="text" name="Nombres" class="form-control" required />
@@ -51,13 +54,10 @@
                 <option value="Femenino">Femenino</option>
             </select>
         </div>
-        <div class="form-check mb-3">
-            <input type="checkbox" name="Estado" class="form-check-input" checked />
-            <label class="form-check-label">Activo</label>
-        </div>
     }
     else if (tipo == "Medico")
     {
+        <!-- Campos de Médico -->
         <div class="mb-3">
             <label class="form-label">Nombres</label>
             <input type="text" name="Nombres" class="form-control" required />
@@ -68,15 +68,13 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Especialidad</label>
-            <input type="text" name="Especialidad" class="form-control" required />
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Número de Colegio Médico</label>
-            <input type="text" name="NumColegio" class="form-control" required />
-        </div>
-        <div class="form-check mb-3">
-            <input type="checkbox" name="Estado" class="form-check-input" checked />
-            <label class="form-check-label">Activo</label>
+            <select name="EspecialidadID" class="form-select" required>
+                <option value="">Seleccione Especialidad...</option>
+                @foreach (var especialidad in ViewBag.Especialidades as SelectList)
+                {
+                    <option value="@especialidad.Value">@especialidad.Text</option>
+                }
+            </select>
         </div>
     }
 

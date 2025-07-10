@@ -46,42 +46,59 @@ namespace VentaMueble.Controllers
         {
             try
             {
+                // Validar las credenciales con el tipo de usuario (Paciente, Médico, Administrador)
                 var usuario = logUsuario.Instancia.ValidarUsuario(email, password, Tipousuario);
+
                 if (usuario != null)
                 {
                     if (Tipousuario == "Paciente")
                     {
-                        // Obtengo el paciente desde el usuarioID
+                        // Lógica para paciente
                         var paciente = logPaciente.Instancia.ObtenerPacientePorUsuarioID(usuario.UsuarioID);
-
                         if (paciente != null)
                         {
-                            // Verificar si el paciente está habilitado
                             if (!paciente.Estado)
                             {
                                 ViewBag.Error = "Tu cuenta está deshabilitada. Contacta al administrador.";
                                 return View();
                             }
 
-                            // Si está habilitado, guardar datos en sesión
                             HttpContext.Session.SetString("NombrePaciente", paciente.Nombres);
                             HttpContext.Session.SetInt32("PacienteID", paciente.PacienteID);
+                            return RedirectToAction("Index", "DashboardPaciente");
                         }
-
-                        return RedirectToAction("Index", "DashboardPaciente");
                     }
                     else if (Tipousuario == "Medico")
-                        return RedirectToAction("ListarMedico", "MantenedorMedico");
+                    {
+                        // Buscar al médico usando su usuarioID
+                        var medico = logMedico.Instancia.ObtenerMedicoPorUsuarioID(usuario.UsuarioID);
+                        if (medico != null)
+                        {
+                            if (!medico.Estado)
+                            {
+                                ViewBag.Error = "Tu cuenta está deshabilitada. Contacta al administrador.";
+                                return View();
+                            }
+                            // Guardar el nombre y el ID del médico en la sesión
+                            HttpContext.Session.SetString("NombreMedico", medico.Nombres);
+                            HttpContext.Session.SetInt32("MedicoID", medico.MedicoID);
+
+                            // Enviar el mensaje de éxito al dashboard
+                            TempData["InicioExitoso"] = "¡Bienvenido, Dr(a). " + medico.Nombres + "!";
+
+                            // Redirigir al Dashboard del Médico
+                            return RedirectToAction("Index", "DashboardMedico");  // Asegúrate de que esta redirección sea al controlador correcto
+                        }
+                    }
                     else if (Tipousuario == "Administrador")
                     {
+                        // Lógica para administrador
                         HttpContext.Session.SetString("NombreAdministrador", "Administrador");
                         return RedirectToAction("Index", "DashboardAdministrador");
                     }
-                    else
-                    {
-                        ViewBag.Error = "Tipo de usuario inválido.";
-                        return View();
-                    }
+
+                    ViewBag.Error = "Tipo de usuario inválido.";
+                    return View();
                 }
                 else
                 {
@@ -98,6 +115,7 @@ namespace VentaMueble.Controllers
 
 
 
+
         // GET MostrarRegistro -> muestra vista con tipo de usuario
         [HttpGet]
         public IActionResult MostrarRegistro(string tipo)
@@ -107,10 +125,11 @@ namespace VentaMueble.Controllers
         }
 
         // POST Registrar
+        // POST Registrar
         [HttpPost]
         public IActionResult Registrar(IFormCollection form)
         {
-            var tipo = form["Tipousuario"];
+            var tipo = form["Tipousuario"]; // Tomamos el tipo de usuario del formulario
             var email = form["Email"];
             var password = form["Password"];
 
@@ -120,18 +139,52 @@ namespace VentaMueble.Controllers
                 {
                     Email = email,
                     Password = password,
-                    TipousuarioID = tipo == "Medico" ? 2 : 1
+                    TipousuarioID = tipo == "Medico" ? 2 : 1 // Si es Medico, el TipousuarioID es 2
                 };
 
+                // Insertar el usuario y obtener su ID
                 int nuevoUsuarioID = logUsuario.Instancia.InsertarUsuarioYDevolverID(nuevoUsuario);
                 if (nuevoUsuarioID <= 0)
                 {
                     ViewBag.Error = "Error al crear el usuario.";
-                    ViewBag.Tipousuario = tipo;
                     return View("MostrarRegistro");
                 }
 
-                if (tipo == "Paciente")
+                if (tipo == "Medico")
+                {
+                    // Registrar médico
+                    var medico = new entMedico
+                    {
+                        UsuarioID = nuevoUsuarioID,
+                        Nombres = form["Nombres"],
+                        Apellidos = form["Apellidos"],
+                        Telefono = form["Telefono"],
+                        EspecialidadID = int.Parse(form["EspecialidadID"]),  // Especialidad
+                        Estado = form["Estado"] == "on" // Si está activado el checkbox
+                    };
+
+                    bool inserta = logMedico.Instancia.InsertarMedico(medico);
+                    if (inserta)
+                    {
+                        // Recuperar médico para obtener ID
+                        var medicoCreado = logMedico.Instancia.BuscarMedico(nuevoUsuarioID);
+                        if (medicoCreado != null)
+                        {
+                            // Guardar en sesión
+                            HttpContext.Session.SetString("NombreMedico", medicoCreado.Nombres);
+                            HttpContext.Session.SetInt32("MedicoID", medicoCreado.MedicoID);
+                        }
+
+                        // Redirigir a la vista del médico
+                        return RedirectToAction("ListarMedico", "MantenedorMedico");
+                    }
+                    else
+                    {
+                        ViewBag.Error = "No se pudo registrar el médico.";
+                        return View("MostrarRegistro");
+                    }
+                }
+                else if (tipo == "Paciente")
                 {
                     var paciente = new entPaciente
                     {
@@ -142,7 +195,7 @@ namespace VentaMueble.Controllers
                         FechaNacimiento = DateTime.Parse(form["FechaNacimiento"]),
                         Telefono = form["Telefono"],
                         Sexo = form["Sexo"],
-                        Estado = form["Estado"] == "on"
+                        Estado = form["Estado"] == "on" // Si está activado el checkbox
                     };
 
                     bool inserta = logPaciente.Instancia.InsertarPaciente(paciente);
@@ -156,33 +209,23 @@ namespace VentaMueble.Controllers
                             HttpContext.Session.SetInt32("PacienteID", pacienteCreado.PacienteID);
                         }
 
-                        // Redirigir a su dashboard
                         return RedirectToAction("Index", "DashboardPaciente");
                     }
                     else
                     {
                         ViewBag.Error = "No se pudo registrar el paciente.";
-                        ViewBag.Tipousuario = tipo;
                         return View("MostrarRegistro");
                     }
                 }
 
-                // TODO: Agregar registro de médico si lo necesitas
                 ViewBag.Error = "Tipo de usuario no soportado.";
-                ViewBag.Tipousuario = tipo;
                 return View("MostrarRegistro");
             }
             catch (Exception ex)
             {
                 ViewBag.Error = "Error al registrar: " + ex.Message;
-                ViewBag.Tipousuario = tipo;
                 return View("MostrarRegistro");
             }
         }
-
-
-
-
-
     }
 }

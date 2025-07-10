@@ -35,6 +35,10 @@ namespace CapaLogica
         {
             return datEspecialidad.Instancia.BuscarEspecialidad(id);
         }
+        public List<entEspecialidad> ListarEspecialidadesActivas()
+        {
+            return datEspecialidad.Instancia.ListarEspecialidadesActivas();  // Llamamos al método de la capa de datos
+        }
 
         public bool DeshabilitarEspecialidad(int id)
         {

@@ -36,9 +36,20 @@ namespace CapaLogica
             return datMedico.Instancia.BuscarMedico(id);
         }
 
-        public bool EliminarMedico(int id)
+        public bool DeshabilitarMedico(int id)
         {
-            return datMedico.Instancia.EliminarMedico(id);
+            return datMedico.Instancia.DeshabilitarMedico(id);
+        }
+        public entMedico ObtenerMedicoPorUsuarioID(int usuarioID)
+        {
+            try
+            {
+                return datMedico.Instancia.ObtenerMedicoPorUsuarioID(usuarioID);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
         #endregion
     }

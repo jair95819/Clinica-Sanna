@@ -156,7 +156,42 @@ namespace CapaDatos
 
             return deshabilita;
         }
+        public List<entEspecialidad> ListarEspecialidadesActivas()
+        {
+            List<entEspecialidad> especialidades = new List<entEspecialidad>();
+            SqlCommand cmd = null;
+
+            try
+            {
+                SqlConnection cn = conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spListarEspecialidadesActivas", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    var especialidad = new entEspecialidad
+                    {
+                        EspecialidadID = Convert.ToInt32(reader["EspecialidadID"]),
+                        Nombre = Convert.ToString(reader["Nombre"]),
+                        Estado = Convert.ToInt32(reader["Estado"]) == 1 ? true : false // Se asegura de convertir el estado a un booleano
+                    };
+                    especialidades.Add(especialidad);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener las especialidades activas.", ex);
+            }
+            finally
+            { cmd?.Connection?.Close(); }
+
+            return especialidades;
+        }
+
 
         #endregion
+
     }
 }

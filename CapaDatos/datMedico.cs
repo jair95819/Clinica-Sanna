@@ -151,28 +151,65 @@ namespace CapaDatos
             return m;
         }
 
-        public bool EliminarMedico(int id)
+        public bool DeshabilitarMedico(int id)
         {
             SqlCommand cmd = null;
-            bool elimina = false;
+            bool deshabilita = false;
 
             try
             {
                 SqlConnection cn = conexion.Instancia.Conectar();
-                cmd = new SqlCommand("spEliminarMedico", cn);
+                cmd = new SqlCommand("spDeshabilitarMedico", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@MedicoID", id);
 
                 cn.Open();
                 int i = cmd.ExecuteNonQuery();
-                elimina = (i > 0);
+                deshabilita = (i > 0);
             }
             catch (Exception e)
             { throw e; }
             finally
             { cmd?.Connection?.Close(); }
 
-            return elimina;
+            return deshabilita;
+        }
+
+        public entMedico ObtenerMedicoPorUsuarioID(int usuarioID)
+        {
+            SqlCommand cmd = null;
+            entMedico medico = null;
+
+            try
+            {
+                SqlConnection cn = conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spObtenerMedicoPorUsuarioID", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@UsuarioID", usuarioID);
+
+                cn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    medico = new entMedico
+                    {
+                        MedicoID = Convert.ToInt32(dr["MedicoID"]),
+                        UsuarioID = Convert.ToInt32(dr["UsuarioID"]),
+                        Nombres = Convert.ToString(dr["Nombres"]),
+                        Apellidos = Convert.ToString(dr["Apellidos"]),
+                        Telefono = Convert.ToString(dr["Telefono"]),
+                        Estado = Convert.ToBoolean(dr["Estado"]),
+                        EspecialidadID = Convert.ToInt32(dr["EspecialidadID"])
+                    };
+                }
+            }
+            catch (Exception e)
+            { throw e; }
+            finally
+            { cmd?.Connection?.Close(); }
+
+            return medico;
         }
 
         #endregion

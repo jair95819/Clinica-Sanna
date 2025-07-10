@@ -1,0 +1,35 @@
+﻿@model CapaEntidad.entMedico
+
+@{
+    Layout = "_LayoutAdministrador";
+    ViewData["Title"] = "Deshabilitar Médico";
+}
+
+<h4 class="mt-4 mb-3 text-danger">¿Estás seguro que deseas deshabilitar a este médico?</h4>
+<hr />
+
+<dl class="row">
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.MedicoID)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(model => model.MedicoID)</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Nombres)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(model => model.Nombres)</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Apellidos)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(model => model.Apellidos)</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Telefono)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(model => model.Telefono)</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.EspecialidadID)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(model => model.EspecialidadID)</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Estado)</dt>
+    <dd class="col-sm-9">@(Model.Estado ? "Activo" : "Inactivo")</dd>
+</dl>
+
+<form asp-action="ConfirmarDeshabilitarMedico" method="post">
+    <input type="hidden" name="id" value="@Model.MedicoID" />
+    <button type="submit" class="btn btn-warning">Deshabilitar</button>
+    <a asp-action="ListarMedico" class="btn btn-secondary ms-2">Cancelar</a>
+</form>

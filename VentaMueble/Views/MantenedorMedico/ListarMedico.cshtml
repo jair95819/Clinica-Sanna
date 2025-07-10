@@ -1,0 +1,42 @@
+﻿@model IEnumerable<CapaEntidad.entMedico>
+@{
+    Layout = "_LayoutAdministrador";
+    ViewData["Title"] = "Listar Médicos";
+}
+
+<h4 class="mt-4 mb-3">Listado de Médicos</h4>
+
+<p>
+    @Html.ActionLink("Insertar nuevo médico", "InsertarMedico", null, new { @class = "btn btn-success mb-3" })
+</p>
+
+<table class="table table-bordered table-striped table-hover">
+    <thead class="table-primary">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.MedicoID)</th>
+            <th>@Html.DisplayNameFor(model => model.Nombres)</th>
+            <th>@Html.DisplayNameFor(model => model.Apellidos)</th>
+            <th>@Html.DisplayNameFor(model => model.Telefono)</th>
+            <th>@Html.DisplayNameFor(model => model.EspecialidadID)</th>
+            <th>@Html.DisplayNameFor(model => model.Estado)</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MedicoID</td>
+                <td>@item.Nombres</td>
+                <td>@item.Apellidos</td>
+                <td>@item.Telefono</td>
+                <td>@item.EspecialidadID</td>
+                <td>@(item.Estado ? "Activo" : "Inactivo")</td>
+                <td>
+                    @Html.ActionLink("Editar", "EditarMedico", new { id = item.MedicoID }, new { @class = "btn btn-sm btn-primary me-2" })
+                    @Html.ActionLink("Deshabilitar", "DeshabilitarMedico", new { id = item.MedicoID }, new { @class = "btn btn-sm btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
