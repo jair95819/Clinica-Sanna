@@ -10,6 +10,15 @@ namespace VentaMueble.Controllers
         [HttpGet]
         public IActionResult InsertarCita()
         {
+            var tiposCita = logTipoCita.Instancia.ListarTipoCita();
+            ViewBag.TipoCita = tiposCita?
+                .Where(t => t != null && t.nombre != null)
+                .Select(t => new SelectListItem
+                {
+                    Value = t.id.ToString(),
+                    Text = t.nombre
+                }).ToList();
+
             // Simulación de datos para los combos
             ViewBag.Fechas = new SelectList(new List<string>
             {
@@ -36,7 +45,7 @@ namespace VentaMueble.Controllers
                 "Cardiología", "Pediatría", "Neurología"
             });
 
-            return View();
+            return View(new entCita());
         }
 
         // POST: MantenedorCita/InsertarCita
@@ -53,6 +62,9 @@ namespace VentaMueble.Controllers
             }
 
             // Si hay error de validación, volver a cargar combos y devolver la vista
+            var tiposCita = logTipoCita.Instancia.ListarTipoCita();
+            ViewBag.TipoCitas = new SelectList(tiposCita, "id", "nombre");
+
             InsertarCita(); // para cargar los combos
             return View(cita);
         }
