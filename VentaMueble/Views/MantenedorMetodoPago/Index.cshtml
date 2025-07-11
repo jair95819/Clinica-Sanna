@@ -1,0 +1,27 @@
+﻿@model List<CapaEntidad.entMetodopago>
+
+<h2>Lista de Métodos de Pago</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MetodopagoID</td>
+                <td>@item.Nombre</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>Agregar Nuevo</h3>
+<form method="post" asp-action="Crear">
+    <input type="text" name="nombre" placeholder="Nombre método de pago" class="form-control" />
+    <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+</form>

@@ -23,7 +23,7 @@ namespace CapaDatos
         {
             SqlConnection cn = new SqlConnection();
 
-            cn.ConnectionString = "Data Source=DESKTOP-B1IDBPL\\SQLEXPRESS02;initial Catalog=ClinicaSanna;" + "Integrated Security=true";
+            cn.ConnectionString = "Data Source=DESKTOP-5J5OED0\\SQLEXPRESS;initial Catalog=ClinicaSanna;" + "Integrated Security=true";
             return cn;
         }
     }

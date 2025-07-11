@@ -90,6 +90,7 @@
     <Compile Include="datDiagnostico.cs" />
     <Compile Include="datEspecialidad.cs" />
     <Compile Include="datMedico.cs" />
+    <Compile Include="datMetodoPago.cs" />
     <Compile Include="datPaciente.cs" />
     <Compile Include="datPago.cs" />
     <Compile Include="datSede.cs" />

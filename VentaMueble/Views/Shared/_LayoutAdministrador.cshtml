@@ -23,7 +23,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown">Opciones</a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="@Url.Action("CerrarSesion", "Cuenta")">Cerrar Sesión</a></li>
+                    <li><a class="dropdown-item" href="/Cuenta/CerrarSesion">Cerrar Sesión</a></li>
                 </ul>
             </li>
         </ul>
@@ -76,11 +76,6 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-prescription"></i></div>
                             Prescripciones Médicas
                         </a>
-                        <a class="nav-link" href="@Url.Action("CerrarSesion", "Cuenta")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-sign-out-alt"></i></div>
-                            Cerrar Sesión
-                        </a>
-
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
@@ -113,6 +108,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/scripts.js"></script>
     @RenderSection("Scripts", required: false)
-
 </body>
 </html>
