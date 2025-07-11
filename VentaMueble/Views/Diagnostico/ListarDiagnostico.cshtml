@@ -1,0 +1,39 @@
+﻿@model IEnumerable<CapaEntidad.entDiagnostico>
+
+@{
+    ViewData["Title"] = "ListarDiagnostico";
+    Layout = "~/Views/Shared/_LayoutMedico.cshtml";
+}
+
+<div class="mt-4">
+    <h4>Listado de Diagnosticos</h4>
+    <a href="@Url.Action("ListarCita", "MantenedorCita", new {Tipo = "Medico"})" class="btn btn-success mb-3">Crear nuevo diagnostico</a>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.id)</th>
+                <th>@Html.DisplayNameFor(model => model.idMedico)</th>
+                <th>@Html.DisplayNameFor(model => model.sintomas)</th>
+                <th>@Html.DisplayNameFor(model => model.observaciones)</th>
+                <th>@Html.DisplayNameFor(model => model.fecha)</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var diagnostico in Model)
+            {
+                <tr>
+                    <td>@diagnostico.id</td>
+                    <td>@diagnostico.idMedico</td>
+                    <td>@diagnostico.sintomas</td>
+                    <td>@diagnostico.observaciones</td>
+                    <td>@diagnostico.fecha</td>
+                    <td>
+                        <a href="@Url.Action("InsertarDiagnostico", "Diagnostico")" class="btn btn-sm btn-success">Realizar Diagnostico</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
