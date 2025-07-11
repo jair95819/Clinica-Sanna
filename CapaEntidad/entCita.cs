@@ -19,7 +19,7 @@ namespace CapaEntidad
         public int? idCita { get; set; }
         public DateTime fCita { get; set; }
         public int tCita { get; set; }
-        public int sedeCita { get; set; }
+        public int idSede { get; set; }
         public string consCita { get; set; }
         public string estCita { get; set; }
     }

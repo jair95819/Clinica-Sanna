@@ -7,10 +7,9 @@
 
 <div class="mt-4">
     <h1 class="mb-4">Reservar Cita Médica</h1>
-
     <hr />
 
-    <form asp-action="InsertarCita">
+    <form asp-action="InsertarCita" method="post">
         <div class="row">
             <div class="col-md-6">
                 <h4>Tipo de Cita</h4>
@@ -27,7 +26,7 @@
             <div class="col-md-4">
                 <h4>Sede</h4>
                 <div class="form-group">
-                    <select asp-for="sedeCita" asp-items="ViewBag.ListaSedes" class="form-control">
+                    <select asp-for="idSede" asp-items="ViewBag.Sedes" class="form-control">
                         <option value="">Seleccione Sede</option>
                     </select>
                 </div>

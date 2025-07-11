@@ -17,6 +17,7 @@ namespace CapaDatos
         #endregion
 
         #region Métodos
+        // Método para listar todas las citas
         public List<entCita> ListarCita()
         {
             List<entCita> lista = new List<entCita>();
@@ -35,7 +36,7 @@ namespace CapaDatos
                     var m = new entCita
                     {
                         idCita = Convert.ToInt32(dr["CitaID"]),
-                        sedeCita = Convert.ToInt32(dr["SedeID"]),
+                        idSede = Convert.ToInt32(dr["SedeID"]),
                         tCita = Convert.ToInt32(dr["TipoCitaID"]),
                         idMedico = Convert.ToInt32(dr["MedicoID"]),
                         fCita = Convert.ToDateTime(dr["FechaCita"]),
@@ -46,14 +47,18 @@ namespace CapaDatos
                 }
             }
             catch (Exception e)
-            { throw e; }
+            {
+                throw e;
+            }
             finally
-            { cmd?.Connection?.Close(); }
+            {
+                cmd?.Connection?.Close();
+            }
 
             return lista;
-            #endregion
         }
 
+        // Método para insertar una nueva cita
         public bool InsertarCita(entCita m)
         {
             SqlCommand cmd = null;
@@ -65,10 +70,11 @@ namespace CapaDatos
                 cmd = new SqlCommand("spInsertarCita", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
+                // Añadir parámetros para el procedimiento almacenado
                 cmd.Parameters.AddWithValue("@paciente", m.PacienteID);
                 cmd.Parameters.AddWithValue("@medico", m.idMedico);
                 cmd.Parameters.AddWithValue("@tipo", m.tCita);
-                cmd.Parameters.AddWithValue("@sede", m.sedeCita);
+                cmd.Parameters.AddWithValue("@sede", m.idSede);
                 cmd.Parameters.AddWithValue("@cons", m.consCita);
                 cmd.Parameters.AddWithValue("@est", m.estCita);
                 cmd.Parameters.AddWithValue("@fecha", m.fCita);
@@ -76,14 +82,19 @@ namespace CapaDatos
 
                 cn.Open();
                 int i = cmd.ExecuteNonQuery();
-                inserta = (i > 0);
+                inserta = (i > 0); // Si se inserta, devuelve true
             }
             catch (Exception e)
-            { throw e; }
+            {
+                throw e;
+            }
             finally
-            { cmd?.Connection?.Close(); }
+            {
+                cmd?.Connection?.Close();
+            }
 
             return inserta;
         }
+        #endregion
     }
 }
