@@ -1,0 +1,26 @@
+﻿@model CapaEntidad.entSede
+
+@{
+    Layout = "_LayoutAdministrador";
+    ViewData["Title"] = "Deshabilitar Sede";
+}
+
+<h4 class="mt-4 mb-3 text-danger">¿Estás seguro que deseas deshabilitar esta sede?</h4>
+<hr />
+
+<dl class="row">
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.idSede)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(model => model.idSede)</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.nombre)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(model => model.nombre)</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.direccion)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(model => model.direccion)</dd>
+</dl>
+
+<form asp-action="ConfirmarDeshabilitarSede" method="post">
+    <input type="hidden" name="id" value="@Model.idSede" />
+    <button type="submit" class="btn btn-warning">Deshabilitar</button>
+    <a asp-action="ListarSede" class="btn btn-secondary ms-2">Cancelar</a>
+</form>

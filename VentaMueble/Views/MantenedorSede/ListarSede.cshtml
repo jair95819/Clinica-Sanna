@@ -1,0 +1,37 @@
+﻿@model IEnumerable<CapaEntidad.entSede>
+
+@{
+    Layout = "_LayoutAdministrador";
+    ViewData["Title"] = "Listado de Sedes";
+}
+
+<h4 class="mt-4 mb-3">Listado de Sedes</h4>
+
+<p>
+    @Html.ActionLink("Insertar nueva sede", "InsertarSede", null, new { @class = "btn btn-success mb-3" })
+</p>
+
+<table class="table table-bordered table-striped table-hover">
+    <thead class="table-primary">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.idSede)</th>
+            <th>@Html.DisplayNameFor(model => model.nombre)</th>
+            <th>@Html.DisplayNameFor(model => model.direccion)</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.idSede</td>
+                <td>@item.nombre</td>
+                <td>@item.direccion</td>
+                <td>
+                    @Html.ActionLink("Editar", "EditarSede", new { id = item.idSede }, new { @class = "btn btn-sm btn-primary me-2" })
+                    @Html.ActionLink("Deshabilitar", "DeshabilitarSede", new { id = item.idSede }, new { @class = "btn btn-sm btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

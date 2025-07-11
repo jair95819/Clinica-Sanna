@@ -1,0 +1,40 @@
+﻿@model CapaEntidad.entSede
+
+@{
+    Layout = "_LayoutAdministrador";
+    ViewData["Title"] = "Editar Sede";
+}
+
+<h4 class="mt-4 mb-3">Editar Sede</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="EditarSede" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <input asp-for="idSede" type="hidden" />
+
+            <div class="mb-3">
+                <label asp-for="nombre" class="form-label">Nombre</label>
+                <input asp-for="nombre" class="form-control" />
+                <span asp-validation-for="nombre" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="direccion" class="form-label">Dirección</label>
+                <input asp-for="direccion" class="form-control" />
+                <span asp-validation-for="direccion" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+            <a asp-action="ListarSede" class="btn btn-secondary ms-2">Cancelar</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

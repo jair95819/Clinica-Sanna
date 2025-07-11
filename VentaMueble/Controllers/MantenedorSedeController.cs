@@ -1,46 +1,143 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using CapaEntidad;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using CapaEntidad;
+using CapaLogica;
+using Microsoft.AspNetCore.Mvc;
 
 namespace VentaMueble.Controllers
 {
     public class MantenedorSedeController : Controller
     {
-        private static List<entSede> lista = new List<entSede>
-        {
-            new entSede { idSede = 1, nombre = "Sede Central", direccion = "Av. Lima 123" },
-            new entSede { idSede = 2, nombre = "Sede Norte", direccion = "Calle Norte 456" }
-        };
-        private static int ultimoId = 2;
+        private readonly ILogger<MantenedorSedeController> _logger;
 
-        [HttpGet]
-        public IActionResult Index()
+        public MantenedorSedeController(ILogger<MantenedorSedeController> logger)
         {
-            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
-                return PartialView(lista);
+            _logger = logger;
+        }
+
+        // Acción para listar todas las sedes
+        public IActionResult ListarSede()
+        {
+            List<entSede> lista = logSede.Instancia.ListarSede();
             return View(lista);
         }
 
-        [HttpPost]
-        public IActionResult Insertar(entSede sede)
+        // Acción para mostrar la vista de inserción de sede
+        [HttpGet]
+        public IActionResult InsertarSede()
         {
-            if (ModelState.IsValid)
-            {
-                sede.idSede = ++ultimoId;
-                lista.Add(sede);
-                return RedirectToAction("Index");
-            }
-            return View("Index", lista);
+            return View();
         }
 
+        // Acción para procesar la inserción de una nueva sede
         [HttpPost]
-        public IActionResult Eliminar(int id)
+        public IActionResult InsertarSede(entSede sede)
         {
-            var item = lista.FirstOrDefault(s => s.idSede == id);
-            if (item != null)
-                lista.Remove(item);
-            return RedirectToAction("Index");
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    bool inserta = logSede.Instancia.InsertarSede(sede);
+                    if (inserta)
+                    {
+                        TempData["Mensaje"] = "Sede insertada correctamente.";
+                        return RedirectToAction("ListarSede");
+                    }
+                    else
+                    {
+                        ViewBag.Error = "No se pudo insertar la sede.";
+                    }
+                }
+                else
+                {
+                    ViewBag.Error = "Datos inválidos.";
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Error: " + ex.Message;
+            }
+            return View(sede);
+        }
+
+        // Acción para mostrar la vista de edición de una sede
+        [HttpGet]
+        public IActionResult EditarSede(int id)
+        {
+            var sede = logSede.Instancia.BuscarSede(id);
+            if (sede == null)
+            {
+                return RedirectToAction("ListarSede");
+            }
+            return View(sede);
+        }
+
+        // Acción para procesar la edición de una sede
+        [HttpPost]
+        public IActionResult EditarSede(entSede sede)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    bool edita = logSede.Instancia.EditarSede(sede);
+                    if (edita)
+                    {
+                        TempData["Mensaje"] = "Sede editada correctamente.";
+                        return RedirectToAction("ListarSede");
+                    }
+                    else
+                    {
+                        ViewBag.Error = "No se pudo editar la sede.";
+                    }
+                }
+                else
+                {
+                    ViewBag.Error = "Datos inválidos.";
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Error: " + ex.Message;
+            }
+            return View(sede);
+        }
+
+        // Acción para mostrar la vista de deshabilitar sede
+        [HttpGet]
+        public IActionResult DeshabilitarSede(int id)
+        {
+            var sede = logSede.Instancia.BuscarSede(id);
+            if (sede == null)
+            {
+                return RedirectToAction("ListarSede");
+            }
+            return View(sede);
+        }
+
+        // Acción para confirmar y procesar la deshabilitación de la sede
+        [HttpPost]
+        public IActionResult ConfirmarDeshabilitarSede(int id)
+        {
+            try
+            {
+                bool deshabilita = logSede.Instancia.DeshabilitarSede(id);
+                if (deshabilita)
+                {
+                    TempData["Mensaje"] = "Sede deshabilitada correctamente.";
+                }
+                else
+                {
+                    TempData["Error"] = "No se pudo deshabilitar la sede.";
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = "Error al deshabilitar: " + ex.Message;
+            }
+            return RedirectToAction("ListarSede");
         }
     }
 }
