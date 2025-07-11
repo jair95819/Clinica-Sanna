@@ -37,7 +37,7 @@
             <div class="col-md-4">
                 <h4>Especialidad</h4>
                 <div class="form-group">
-                    <select asp-for="especialidadMedico" asp-items="ViewBag.ListaEspecialidades" class="form-control" disabled="false">
+                    <select asp-for="idEspecialidad" asp-items="ViewBag.Especialidad" class="form-control">
                         <option value="">Seleccione especialidad</option>
                     </select>
                 </div>
@@ -47,7 +47,7 @@
             <div class="col-md-4">
                 <h4>Médico</h4>
                 <div class="form-group">
-                    <select asp-for="nombreMedico" asp-items="ViewBag.ListaMedico" class="form-control" disabled="false">
+                    <select asp-for="idMedico" asp-items="ViewBag.Medico" class="form-control">
                         <option value="">Seleccione Medico</option>
                     </select>
                 </div>
@@ -61,7 +61,7 @@
             <div class="col-md-6">
                 <h4>Turno de la Cita</h4>
                 <div class="form-group">
-                    <select asp-for="hCita" asp-items="ViewBag.ListaHoras" class="form-control">
+                    <select asp-for="fCita" asp-items="ViewBag.ListaHoras" class="form-control">
                         <option value="">Seleccione una hora</option>
                     </select>
                 </div>

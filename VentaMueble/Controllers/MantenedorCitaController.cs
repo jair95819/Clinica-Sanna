@@ -19,33 +19,34 @@ namespace VentaMueble.Controllers
                     Text = t.nombre
                 }).ToList();
 
-            // Simulación de datos para los combos
-            ViewBag.Fechas = new SelectList(new List<string>
-            {
-                "2024-09-10", "2024-09-11", "2024-09-12"
-            });
+            var medicos = logMedico.Instancia.ListarMedico();
+            ViewBag.Medico = medicos?
+                .Where(m => m != null && m.Nombres != null)
+                .Select(m => new SelectListItem
+                {
+                    Value = m.MedicoID.ToString(),
+                    Text = m.Nombres + " " + m.Apellidos
+                }).ToList();
 
-            ViewBag.Horas = new SelectList(new List<string>
-            {
-                "08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM"
-            });
+            var especialidades = logEspecialidad.Instancia.ListarEspecialidad();
+            ViewBag.Especialidad = especialidades?
+                .Where(e => e != null && e.Nombre != null)
+                .Select(e => new SelectListItem
+                {
+                    Value = e.EspecialidadID.ToString(),
+                    Text = e.Nombre
+                }).ToList();
 
-            ViewBag.Sedes = new SelectList(new List<string>
-            {
-                "Sede Central", "Sede Norte", "Sede Sur"
-            });
+            /*var sedes = logSede.Instancia.ListarSede();
+            ViewBag.Sedes = sedes?
+                .Where(s => s != null && s.nombre != null)
+                .Select(s => new SelectListItem
+                {
+                    Value = s.id.ToString(),
+                    Text = s.nombre + " - " + s.direccion
+                }).ToList();*/
 
-            ViewBag.Medicos = new SelectList(new List<string>
-            {
-                "Dr. Juan Pérez", "Dra. Ana Torres", "Dr. Luis Gómez"
-            });
-
-            ViewBag.Especialidades = new SelectList(new List<string>
-            {
-                "Cardiología", "Pediatría", "Neurología"
-            });
-
-            return View(new entCita());
+            return View();
         }
 
         // POST: MantenedorCita/InsertarCita
@@ -54,8 +55,7 @@ namespace VentaMueble.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Aquí iría la lógica para guardar la cita usando la CapaLogica
-                // logCita.Instancia.InsertarCita(cita);
+                //logCita.Instancia.InsertarCita(cita);
 
                 TempData["mensaje"] = "Cita reservada correctamente.";
                 return RedirectToAction("ListarCita");
@@ -63,7 +63,31 @@ namespace VentaMueble.Controllers
 
             // Si hay error de validación, volver a cargar combos y devolver la vista
             var tiposCita = logTipoCita.Instancia.ListarTipoCita();
-            ViewBag.TipoCitas = new SelectList(tiposCita, "id", "nombre");
+            ViewBag.TipoCita = tiposCita?
+                .Where(t => t != null && t.nombre != null)
+                .Select(t => new SelectListItem
+                {
+                    Value = t.id.ToString(),
+                    Text = t.nombre
+                }).ToList();
+
+            var medicos = logMedico.Instancia.ListarMedico();
+            ViewBag.Medicos = medicos?
+                .Where(m => m != null && m.Nombres != null)
+                .Select(m => new SelectListItem
+                {
+                    Value = m.MedicoID.ToString(),
+                    Text = m.Nombres + " " + m.Apellidos
+                }).ToList();
+
+            var especialidades = logEspecialidad.Instancia.ListarEspecialidad();
+            ViewBag.Especialidad = especialidades?
+                .Where(e => e != null && e.Nombre != null)
+                .Select(e => new SelectListItem
+                {
+                    Value = e.EspecialidadID.ToString(),
+                    Text = e.Nombre
+                }).ToList();
 
             InsertarCita(); // para cargar los combos
             return View(cita);
@@ -75,35 +99,20 @@ namespace VentaMueble.Controllers
         }
 
         [HttpGet]
-        public IActionResult ListarCita()
+        public IActionResult ListarCita(string tipo)
         {
-            // Simulación de datos (normalmente esto vendría desde la Capa Lógica)
-            var listaCitas = new List<entCita>
+            if (tipo == "Medico")
             {
-                new entCita
-                {
-                    idCita = 1,
-                    fCita = "2024-09-10",
-                    hCita = "08:00 AM",
-                    sedeCita = "Sede Central",
-                    consCita = "Consultorio 1",
-                    nombrePaciente = "María López",
-                    nombreMedico = "Dr. Juan Pérez",
-                    especialidadMedico = "Cardiología"
-                },
-                new entCita
-                {
-                    idCita = 2,
-                    fCita = "2024-09-11",
-                    hCita = "10:00 AM",
-                    sedeCita = "Sede Norte",
-                    consCita = "Consultorio 2",
-                    nombrePaciente = "Carlos Ramírez",
-                    nombreMedico = "Dra. Ana Torres",
-                    especialidadMedico = "Pediatría"
-                }
-            };
+                ViewBag.Layout = "~/Views/Shared/_LayoutMedico.cshtml";
+            } 
 
+            if (tipo == "Paciente")
+            {
+                ViewBag.Layout = "~/Views/Shared/_LayoutPaciente.cshtml";
+            }
+
+            ViewBag.Tipo = tipo;
+            var listaCitas = logCita.Instancia.ListarCita();
             return View(listaCitas);
         }
     }

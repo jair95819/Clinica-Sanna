@@ -2,65 +2,53 @@
 
 @{
     ViewData["Title"] = "ListarCita";
-    Layout = "~/Views/Shared/_LayoutPaciente.cshtml";
+    Layout = ViewBag.Layout;
+    var Tipo = ViewBag.Tipo as string;
 }
 
 <div class="mt-4">
     <h4>Listado de Citas</h4>
-    <a href="@Url.Action("InsertarCita", "MantenedorCita")" class="btn btn-success mb-3">Crear Nueva Cita</a>
+    @if (Tipo == "Paciente")
+    {
+        <a href="@Url.Action("InsertarCita", "MantenedorCita")" class="btn btn-success mb-3">Crear Nueva Cita</a>
+    }
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th>@Html.DisplayNameFor(model => model.idCita)</th>
+                <th>@Html.DisplayNameFor(model => model.idMedico)</th>
                 <th>@Html.DisplayNameFor(model => model.fCita)</th>
-                <th>@Html.DisplayNameFor(model => model.hCita)</th>
                 <th>@Html.DisplayNameFor(model => model.sedeCita)</th>
                 <th>@Html.DisplayNameFor(model => model.consCita)</th>
-                <th>Paciente</th>
-                <th>Médico</th>
-                <th>Especialidad</th>
+                <th>@Html.DisplayNameFor(model => model.tCita)</th>
+                <th>@Html.DisplayNameFor(model => model.estCita)</th>
                 <th>Acciones</th>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var cita in Model ?? new List<CapaEntidad.entCita> {
-            new CapaEntidad.entCita {
-            idCita = 1,
-            fCita = "2024-09-10",
-            hCita = "08:00 AM",
-            sedeCita = "Sede Central",
-            consCita = "Consultorio 1",
-            nombrePaciente = "María López",
-            nombreMedico = "Dr. Juan Pérez",
-            especialidadMedico = "Cardiología"
-            },
-            new CapaEntidad.entCita {
-            idCita = 2,
-            fCita = "2024-09-11",
-            hCita = "10:00 AM",
-            sedeCita = "Sede Norte",
-            consCita = "Consultorio 2",
-            nombrePaciente = "Carlos Ramírez",
-            nombreMedico = "Dra. Ana Torres",
-            especialidadMedico = "Pediatría"
-            }
-            })
+            <tbody>
+            @foreach (var cita in Model)
             {
                 <tr>
                     <td>@cita.idCita</td>
+                    <td>@cita.idMedico</td>
                     <td>@cita.fCita</td>
-                    <td>@cita.hCita</td>
                     <td>@cita.sedeCita</td>
                     <td>@cita.consCita</td>
-                    <td>@cita.nombrePaciente</td>
-                    <td>@cita.nombreMedico</td>
-                    <td>@cita.especialidadMedico</td>
+                    <td>@cita.tCita</td>
+                    <td>@cita.estCita</td>
                     <td>
-                        <a href="#" class="btn btn-sm btn-primary">Editar</a>
-                        <a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+                        @if (Tipo == "Paciente")
+                        {
+                            <a href="@Url.Action("InsertarPago", "Pago", new { idCita = cita.idCita })" class="btn btn-sm btn-success">Pagar</a>
+                        }
+                        @if (Tipo == "Medico")
+                        {
+                            <a href="@Url.Action("InsertarDiagnostico", "Diagnostico", new { idCita = cita.idCita })" class="btn btn-sm btn-success">Realizar Diagnostico</a>
+                        }
                     </td>
                 </tr>
             }
-        </tbody>
+            </tbody>
+        </thead>
+
     </table>
 </div>

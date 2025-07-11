@@ -86,9 +86,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="conexion.cs" />
+    <Compile Include="datCita.cs" />
     <Compile Include="datEspecialidad.cs" />
     <Compile Include="datMedico.cs" />
     <Compile Include="datPaciente.cs" />
+    <Compile Include="datPago.cs" />
     <Compile Include="datTipoCita.cs" />
     <Compile Include="datTipousuario.cs" />
     <Compile Include="datUsuario.cs" />

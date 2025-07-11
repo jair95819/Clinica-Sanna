@@ -48,6 +48,7 @@
     <Compile Include="entCita.cs" />
     <Compile Include="entPaciente.cs" />
     <Compile Include="entMedico.cs" />
+    <Compile Include="entPago.cs" />
     <Compile Include="entSede.cs" />
     <Compile Include="entTipoCita.cs" />
     <Compile Include="entUsuario.cs" />
