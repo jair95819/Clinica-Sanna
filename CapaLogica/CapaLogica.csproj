@@ -47,6 +47,7 @@
     <Compile Include="logMedico.cs" />
     <Compile Include="logPaciente.cs" />
     <Compile Include="logPago.cs" />
+    <Compile Include="logSede.cs" />
     <Compile Include="logTipoCita.cs" />
     <Compile Include="logTipousuario.cs" />
     <Compile Include="logUsuario.cs" />
