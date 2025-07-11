@@ -1,0 +1,46 @@
+﻿@model CapaEntidad.entPago
+
+@{
+    ViewData["Title"] = "InsertarPago";
+    var idCita = ViewData["idCita"];
+    Layout = "~/Views/Shared/_LayoutPaciente.cshtml";
+}
+
+<h1>Ingresar Pago</h1>
+
+<hr />
+<form asp-action="InsertarPago">
+    <div class="row">
+        <div class="col-md-4">
+            <h4>Cita a Pagar</h4>
+            <input asp-for="idCita" class="form-control" readonly/>
+        </div>
+    </div>
+
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <h4>Metodo de Pago</h4>
+            <select asp-for="idMetodoPago" asp-items="ViewBag.MetodoPago" class="form-control">
+                <option value="">Seleccione un método de pago</option>
+            </select>"
+        </div>
+
+        <div class="col-md-4">
+            <h4>Monto a Pagar</h4>
+            <input asp-for="monto" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Pagar" class="btn btn-primary" />
+    </div>
+</form>
+
+<div>
+    <a href="@Url.Action("ListarCita", "MantenedorCita")">Volver</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
