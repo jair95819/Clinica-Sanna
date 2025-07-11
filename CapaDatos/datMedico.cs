@@ -36,8 +36,8 @@ namespace CapaDatos
                     var m = new entMedico
                     {
                         MedicoID = Convert.ToInt32(dr["MedicoID"]),
-                        Nombres = Convert.ToString(dr["Nombres"]),
-                        Apellidos = Convert.ToString(dr["Apellidos"]),
+                        Nombres = Convert.ToString(dr["Nombre"]),
+                        Apellidos = Convert.ToString(dr["Apellido"]),
                         Telefono = Convert.ToString(dr["Telefono"]),
                         Estado = Convert.ToBoolean(dr["Estado"]),
                         UsuarioID = Convert.ToInt32(dr["UsuarioID"]),
@@ -134,8 +134,8 @@ namespace CapaDatos
                     m = new entMedico
                     {
                         MedicoID = Convert.ToInt32(dr["MedicoID"]),
-                        Nombres = Convert.ToString(dr["Nombres"]),
-                        Apellidos = Convert.ToString(dr["Apellidos"]),
+                        Nombres = Convert.ToString(dr["Nombre"]),
+                        Apellidos = Convert.ToString(dr["Apellido"]),
                         Telefono = Convert.ToString(dr["Telefono"]),
                         Estado = Convert.ToBoolean(dr["Estado"]),
                         UsuarioID = Convert.ToInt32(dr["UsuarioID"]),
@@ -196,8 +196,8 @@ namespace CapaDatos
                     {
                         MedicoID = Convert.ToInt32(dr["MedicoID"]),
                         UsuarioID = Convert.ToInt32(dr["UsuarioID"]),
-                        Nombres = Convert.ToString(dr["Nombres"]),
-                        Apellidos = Convert.ToString(dr["Apellidos"]),
+                        Nombres = Convert.ToString(dr["Nombre"]),
+                        Apellidos = Convert.ToString(dr["Apellido"]),
                         Telefono = Convert.ToString(dr["Telefono"]),
                         Estado = Convert.ToBoolean(dr["Estado"]),
                         EspecialidadID = Convert.ToInt32(dr["EspecialidadID"])

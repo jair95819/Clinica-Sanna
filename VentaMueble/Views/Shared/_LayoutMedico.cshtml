@@ -35,7 +35,7 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Menú</div>
-                        <a class="nav-link" href="@Url.Action("Index","Home")">
+                        <a class="nav-link" href="@Url.Action("Index","DashboardMedico")">
                             <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                             Inicio
                         </a>
@@ -43,7 +43,7 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-calendar"></i></div>
                             Turnos de Médico
                         </a>
-                        <a class="nav-link" href="@Url.Action("ListarCita","MantenedorCita")">
+                        <a class="nav-link" href="@Url.Action("ListarCita","MantenedorCita", new {tipo = "Medico"})">
                             <div class="sb-nav-link-icon"><i class="fas fa-calendar-check"></i></div>
                             Mis Citas
                         </a>
